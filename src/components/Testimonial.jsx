@@ -6,7 +6,7 @@ const testimonials = [
     name: "MD Amdad Islam",
     role: "Happy Customer",
     message:
-      "HomeDecor এর সোফা কিনেছি, কোয়ালিটি অসাধারণ! দাম অনুযায়ী দারুণ ভ্যালু।",
+      "TK Furniture এর সোফা কিনেছি, কোয়ালিটি অসাধারণ! দাম অনুযায়ী দারুণ ভ্যালু।",
     image: "https://avatars.githubusercontent.com/u/195456266?v=4",
   },
   {
@@ -14,7 +14,7 @@ const testimonials = [
     name: "Zahidul Islam Mahim",
     role: "Interior Designer",
     message:
-      "আমার ক্লায়েন্টদের জন্য HomeDecor সবসময় recommend করি। ডিজাইন আর durability দারুণ।",
+      "আমার ক্লায়েন্টদের জন্য TK Furniture সবসময় recommend করি। ডিজাইন আর durability দারুণ।",
     image: "https://avatars.githubusercontent.com/u/92626624?v=4",
   },
   {
@@ -22,7 +22,7 @@ const testimonials = [
     name: "Md Rijoan Maruf",
     role: "Businessman",
     message:
-      "ডেলিভারি খুব দ্রুত পেয়েছি। সার্ভিসে আমি ১০/১০ দিব। আবারো কেনার প্ল্যান আছে।",
+      "ডেলিভারি খুব দ্রুত পেয়েছি। সার্ভিসে আমি ১০/১০ দিব। আবারো কেনার প্ল্যান আছে।",
     image: "https://avatars.githubusercontent.com/u/78620963?v=4",
   },
 ];
@@ -32,7 +32,7 @@ const Testimonial = () => {
     <section className="py-16 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-          Why Customers Love <span className="text-cyan-600">HomeDecor</span>
+          Why Customers Love <span className="text-cyan-600">TK Furniture</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -54,7 +54,7 @@ const Testimonial = () => {
                   <p className="text-sm text-gray-500">{t.role}</p>
                 </div>
               </div>
-              <p className="text-gray-600 italic">“{t.message}”</p>
+              <p className="text-gray-600 italic">"{t.message}"</p>
             </div>
           ))}
         </div>

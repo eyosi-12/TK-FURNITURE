@@ -1,178 +1,294 @@
 [
   {
     "id": 1,
-    "name": "Modern Sofa Set",
+    "name": "Oslo 3-Seat Sofa",
     "category": "Living Room",
+    "subCategory": "Sofas",
     "price": 45000,
-    "material": "Fabric & Wood",
-    "dimensions": "200cm x 90cm x 85cm",
-    "stock": 12,
-    "image": "https://i.ibb.co.com/yFMzn9WY/Modern-Sofa-Set.png",
-    "description": "A modern fabric sofa set with a sturdy wooden frame, perfect for comfort and style."
+    "material": "Oak Frame & Linen Upholstery",
+    "materialGroup": "Fabric",
+    "dimensions": "210 x 90 x 85 cm",
+    "leadTime": "2-3 weeks",
+    "stock": 8,
+    "featured": true,
+    "colors": [
+      { "name": "Oatmeal Beige", "hex": "#D8CAB8" },
+      { "name": "Slate Charcoal", "hex": "#383E42" },
+      { "name": "Forest Green", "hex": "#2E473B" }
+    ],
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Tailored for relaxed modern living, the Oslo 3-Seat Sofa pairs a solid kiln-dried oak structure with textured Belgian linen cushions. Hand-finished by our Addis Ababa workshop artisans."
   },
   {
     "id": 2,
-    "name": "Wooden Dining Table",
-    "category": "Dining Room",
+    "name": "Nara Teak Dining Table",
+    "category": "Kitchen",
+    "subCategory": "Dining Tables",
     "price": 38000,
-    "material": "Solid Teak Wood",
-    "dimensions": "180cm x 90cm x 75cm",
-    "stock": 8,
-    "image": "https://i.ibb.co.com/rK5XDHxT/Wooden-Dining-Table.png",
-    "description": "Elegant teak wood dining table for 6 people, designed for durability and aesthetics."
+    "material": "Solid Teak & Organic Oil",
+    "materialGroup": "Wood",
+    "dimensions": "200 x 95 x 76 cm",
+    "leadTime": "3-4 weeks",
+    "stock": 5,
+    "featured": true,
+    "colors": [
+      { "name": "Natural Teak", "hex": "#9E6B43" },
+      { "name": "Smoked Walnut", "hex": "#4D3425" },
+      { "name": "Raw White Oak", "hex": "#CBB292" }
+    ],
+    "image": "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1577140917170-285929fb55b7?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "A striking centerpiece carved from sustainably harvested solid teak wood. Comfortably accommodates 6 to 8 guests with soft radiused edges and mortise-and-tenon joinery."
   },
   {
     "id": 3,
-    "name": "Office Chair",
+    "name": "Kite Executive Ergonomic Chair",
     "category": "Office",
-    "price": 12000,
-    "material": "Mesh & Metal",
-    "dimensions": "65cm x 65cm x 120cm",
-    "stock": 20,
-    "image": "https://i.ibb.co.com/HfZ3F3zx/Office-Chair.png",
-    "description": "Ergonomic office chair with breathable mesh and adjustable height."
+    "subCategory": "Office Chairs",
+    "price": 18500,
+    "material": "Breathable Mesh & Aluminum Alloy",
+    "materialGroup": "Metal",
+    "dimensions": "68 x 68 x 115-125 cm",
+    "leadTime": "In Stock (1-2 days)",
+    "stock": 14,
+    "featured": false,
+    "colors": [
+      { "name": "Matte Obsidian", "hex": "#222222" },
+      { "name": "Cloud Grey", "hex": "#8C9298" }
+    ],
+    "image": "https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Engineered for high-focus work environments. Synchronized tilt mechanism with 4D lumbar support and aerospace-grade aluminum base."
   },
   {
     "id": 4,
-    "name": "King Size Bed",
+    "name": "Arba Minimalist Platform Bed",
     "category": "Bedroom",
-    "price": 55000,
-    "material": "Engineered Wood",
-    "dimensions": "210cm x 190cm x 110cm",
+    "subCategory": "Beds",
+    "price": 52000,
+    "material": "Solid Walnut & Fabric Headboard",
+    "materialGroup": "Wood",
+    "dimensions": "215 x 195 x 105 cm (King)",
+    "leadTime": "2-3 weeks",
     "stock": 6,
-    "image": "https://i.ibb.co.com/2myTQ5v/King-Size-Bed.png",
-    "description": "Spacious king-size bed with a durable wooden frame and modern headboard design."
+    "featured": false,
+    "colors": [
+      { "name": "Dark Walnut", "hex": "#4A3222" },
+      { "name": "Warm Natural Oak", "hex": "#BFA588" }
+    ],
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Low-profile architectural platform bed crafted from solid Ethiopian walnut. Features an integrated upholstered headboard angled perfectly for evening reading."
   },
   {
     "id": 5,
-    "name": "Bookshelf",
-    "category": "Study",
-    "price": 15000,
-    "material": "Plywood & Veneer",
-    "dimensions": "120cm x 35cm x 180cm",
-    "stock": 15,
-    "image": "https://i.ibb.co.com/YFmRNMP6/Bookshelf.png",
-    "description": "A stylish wooden bookshelf with multiple compartments for books and decor items."
+    "name": "Akaki Modular Walnut Bookshelf",
+    "category": "Office",
+    "subCategory": "Shelving",
+    "price": 28000,
+    "material": "Solid Ash & Walnut Veneer",
+    "materialGroup": "Wood",
+    "dimensions": "140 x 36 x 195 cm",
+    "leadTime": "2 weeks",
+    "stock": 9,
+    "featured": false,
+    "colors": [
+      { "name": "Natural Ash", "hex": "#C5AE91" },
+      { "name": "Ebony Stained", "hex": "#272523" }
+    ],
+    "image": "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1597072689227-8882273e8f6a?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Geometric open-shelving system engineered to showcase prized books, ceramics, and indoor greenery. Seamless concealed wall mounts."
   },
   {
     "id": 6,
-    "name": "Coffee Table",
+    "name": "Entoto Travertine Coffee Table",
     "category": "Living Room",
-    "price": 10000,
-    "material": "Glass & Steel",
-    "dimensions": "110cm x 60cm x 45cm",
-    "stock": 18,
-    "image": "https://i.ibb.co.com/cSr2YdzV/Coffee-Table.png",
-    "description": "Contemporary glass-top coffee table with stainless steel frame."
+    "subCategory": "Coffee Tables",
+    "price": 22000,
+    "material": "Honed Travertine & Brushed Brass",
+    "materialGroup": "Metal",
+    "dimensions": "120 x 70 x 42 cm",
+    "leadTime": "Ready to Ship",
+    "stock": 11,
+    "featured": false,
+    "colors": [
+      { "name": "Cream Travertine", "hex": "#E6DBC9" },
+      { "name": "Nero Marquina", "hex": "#2C2C2C" }
+    ],
+    "image": "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Sculptural low coffee table featuring an unpolished Italian-grade honed travertine stone slab perched on curved solid brushed brass pedestal legs."
   },
   {
     "id": 7,
-    "name": "Wardrobe",
+    "name": "Zoma Fluted Wardrobe",
     "category": "Bedroom",
-    "price": 40000,
-    "material": "Laminate & MDF",
-    "dimensions": "200cm x 60cm x 220cm",
-    "stock": 7,
-    "image": "https://i.ibb.co.com/PGvkrLg4/Wardrobe.png",
-    "description": "Spacious wardrobe with sliding doors and ample storage compartments."
+    "subCategory": "Wardrobes",
+    "price": 64000,
+    "material": "Fluted Oak & Brass Hardware",
+    "materialGroup": "Wood",
+    "dimensions": "180 x 62 x 220 cm",
+    "leadTime": "3-4 weeks",
+    "stock": 4,
+    "featured": false,
+    "colors": [
+      { "name": "Smoked Oak", "hex": "#5A4433" },
+      { "name": "Bleached Oak", "hex": "#C9B6A1" }
+    ],
+    "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Architectural statement wardrobe featuring vertical fluted oak doors, full-extension soft-close internal drawers, and integrated warm LED interior sensor lights."
   },
   {
     "id": 8,
-    "name": "Study Desk",
-    "category": "Study",
-    "price": 14000,
-    "material": "Engineered Wood",
-    "dimensions": "120cm x 60cm x 75cm",
-    "stock": 10,
-    "image": "https://i.ibb.co.com/3PX6WR1/Study-Desk.png",
-    "description": "Compact study desk with storage drawers, ideal for students and professionals."
+    "name": "Awash Executive Writing Desk",
+    "category": "Office",
+    "subCategory": "Desks",
+    "price": 26500,
+    "material": "Solid Wanza Wood & Steel Frame",
+    "materialGroup": "Wood",
+    "dimensions": "150 x 70 x 76 cm",
+    "leadTime": "2 weeks",
+    "stock": 7,
+    "featured": false,
+    "colors": [
+      { "name": "Natural Wanza", "hex": "#A8764B" },
+      { "name": "Charcoal Black", "hex": "#2A2928" }
+    ],
+    "image": "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Clean lines meet organic texture. Fabricated with locally sourced Ethiopian Wanza wood top and integrated cable routing channel for uncluttered workspaces."
   },
   {
     "id": 9,
-    "name": "TV Stand",
+    "name": "Sol Modern Media Console",
     "category": "Living Room",
-    "price": 17000,
-    "material": "MDF & Glass",
-    "dimensions": "150cm x 40cm x 55cm",
-    "stock": 14,
-    "image": "https://i.ibb.co.com/39n04pN5/TV-Stand.png",
-    "description": "Modern TV stand with storage cabinets and glass shelves for multimedia setup."
+    "subCategory": "TV Units",
+    "price": 29000,
+    "material": "Natural White Oak & Cane Weave",
+    "materialGroup": "Wood",
+    "dimensions": "180 x 45 x 52 cm",
+    "leadTime": "Ready to Ship",
+    "stock": 10,
+    "featured": false,
+    "colors": [
+      { "name": "Natural Cane / Oak", "hex": "#D1BA9C" },
+      { "name": "Deep Mocha", "hex": "#3E2B1E" }
+    ],
+    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Perforated woven cane sliding doors allow remote control infrared signals to pass freely while keeping electronic equipment concealed and ventilated."
   },
   {
     "id": 10,
-    "name": "Recliner Chair",
+    "name": "Bole Leather Lounge Armchair",
     "category": "Living Room",
-    "price": 25000,
-    "material": "Leather & Steel",
-    "dimensions": "95cm x 100cm x 110cm",
-    "stock": 9,
-    "image": "https://i.ibb.co.com/nh89H6m/Recliner-Chair.png",
-    "description": "Comfortable leather recliner chair with adjustable reclining positions."
+    "subCategory": "Armchairs",
+    "price": 31000,
+    "material": "Full-Grain Saddle Leather & Steel",
+    "materialGroup": "Leather",
+    "dimensions": "86 x 84 x 78 cm",
+    "leadTime": "1-2 weeks",
+    "stock": 8,
+    "featured": true,
+    "colors": [
+      { "name": "Cognac Leather", "hex": "#8C4A25" },
+      { "name": "Raw Umber", "hex": "#503828" },
+      { "name": "Onyx Black", "hex": "#1E1E1E" }
+    ],
+    "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Generous proportions and supple hand-waxed Ethiopian highland full-grain leather that patinas gracefully with age. Supported by a matte black cantilever frame."
   },
   {
     "id": 11,
-    "name": "Bar Stool",
-    "category": "Dining Room",
-    "price": 7000,
-    "material": "Metal & Faux Leather",
-    "dimensions": "45cm x 45cm x 100cm",
-    "stock": 25,
-    "image": "https://i.ibb.co.com/ycH0dGGx/Bar-Stool.png",
-    "description": "Stylish bar stool with cushioned seat and footrest support."
+    "name": "Saba Counter Barstool (Pair)",
+    "category": "Kitchen",
+    "subCategory": "Dining Chairs",
+    "price": 14000,
+    "material": "Solid Walnut & Vegetable Tanned Leather",
+    "materialGroup": "Wood",
+    "dimensions": "44 x 46 x 92 cm (Seat: 65cm)",
+    "leadTime": "In Stock",
+    "stock": 16,
+    "featured": false,
+    "colors": [
+      { "name": "Walnut & Tan", "hex": "#6C4B33" },
+      { "name": "Black & Ebony", "hex": "#1E1E1E" }
+    ],
+    "image": "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Ergonomically contoured solid wood seat saddle with reinforced footrest for kitchen islands and breakfast nooks."
   },
   {
     "id": 12,
-    "name": "Side Table",
-    "category": "Living Room",
-    "price": 8000,
-    "material": "Wood & Veneer",
-    "dimensions": "50cm x 50cm x 55cm",
-    "stock": 22,
-    "image": "https://i.ibb.co.com/3yBnwSyZ/download-68.png",
-    "description": "Elegant wooden side table with minimalistic design, perfect for any corner."
-  },
-  {
-    "id": 13,
-    "name": "Dressing Table",
-    "category": "Bedroom",
-    "price": 20000,
-    "material": "MDF & Mirror",
-    "dimensions": "120cm x 45cm x 160cm",
-    "stock": 11,
-    "image": "https://i.ibb.co.com/WWdz7ywk/Dressing-Table.png",
-    "description": "Modern dressing table with mirror, drawers, and elegant finish."
-  },
-  {
-    "id": 14,
-    "name": "Shoe Rack",
-    "category": "Storage",
-    "price": 9000,
-    "material": "Engineered Wood",
-    "dimensions": "100cm x 35cm x 120cm",
-    "stock": 16,
-    "image": "https://i.ibb.co.com/77mJXyp/Shoe-Rack.png",
-    "description": "Compact shoe rack with multiple shelves for organized storage."
-  },
-  {
-    "id": 15,
-    "name": "Outdoor Patio Set",
-    "category": "Outdoor",
-    "price": 30000,
-    "material": "Rattan & Glass",
-    "dimensions": "Table: 120cm x 70cm, Chair: 60cm x 60cm x 85cm",
-    "stock": 5,
-    "image": "https://i.ibb.co.com/mFYR49by/Outdoor-Patio-Set.png",
-    "description": "Durable rattan outdoor patio set with glass-top table and cushioned chairs."
-  },
-  {
-    "id": 16,
-    "name": "Baby Crib",
-    "category": "Kids",
-    "price": 18000,
-    "material": "Solid Wood",
-    "dimensions": "130cm x 70cm x 100cm",
-    "stock": 13,
-    "image": "https://i.ibb.co.com/MyQkd4RB/Baby-Crib.png",
-    "description": "Safe and comfortable wooden baby crib with protective railings."
+    "name": "Addis Veranda Teak Lounge Set",
+    "category": "Apartment",
+    "subCategory": "Patio Sets",
+    "price": 48000,
+    "material": "Weatherproof Teak & Sunbrella Canvas",
+    "materialGroup": "Wood",
+    "dimensions": "Sofa: 160 x 80 cm, Chairs: 75 x 80 cm",
+    "leadTime": "2-3 weeks",
+    "stock": 6,
+    "featured": false,
+    "colors": [
+      { "name": "Sand Dune Canvas", "hex": "#DFD3C3" },
+      { "name": "Olive Drab", "hex": "#5B644F" }
+    ],
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Designed for terrace and apartment balcony living. Kiln-dried grade-A teak stands up to seasonal rains and strong highland sunlight with zero maintenance."
   }
 ]

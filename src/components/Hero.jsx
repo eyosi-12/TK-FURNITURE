@@ -9,7 +9,7 @@ const Hero = () => {
         {/* Left Content */}
         <div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-            Elevate Your Home with <span className="text-cyan-600">Premium Furniture</span>
+            Elevate Your Home with <span className="text-cyan-600">TK Furniture</span>
           </h1>
           <p className="mt-6 text-lg text-gray-600 leading-relaxed">
             Discover modern and timeless furniture pieces crafted from the best materials.  

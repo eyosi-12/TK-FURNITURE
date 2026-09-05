@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const useProducts = () => {
-  const [products, setProducts] = useState([]);
+const useProjects = () => {
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -11,23 +11,23 @@ const useProducts = () => {
     setLoading(true);
 
     axios
-      .get("/funitruerData.json")
+      .get("/projectsData.json")
       .then((res) => {
         if (Array.isArray(res.data)) {
-          setProducts(res.data);
+          setProjects(res.data);
         } else {
-          setProducts([]);
+          setProjects([]);
         }
       })
       .catch((err) => setError(err))
       .finally(() => {
-        timer = setTimeout(() => setLoading(false), 200);
+        timer = setTimeout(() => setLoading(false), 300);
       });
 
     return () => clearTimeout(timer);
   }, []);
 
-  return { products, loading, error };
+  return { projects, loading, error };
 };
 
-export default useProducts;
+export default useProjects;

@@ -1,61 +1,124 @@
 import React from "react";
+import { Link } from "react-router";
+import { ArrowUpRight } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 text-gray-700 mt-10">
-      <div className="max-w-7xl mx-auto px-4 md:px-10 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        {/* Brand */}
-        <div>
-          <h2 className="text-2xl font-bold text-cyan-700 font-work">
-            Home<span className="text-gray-900">Decor</span>
-          </h2>
-          <p className="mt-3 text-gray-600 text-sm leading-relaxed">
-            Beautiful and modern home decoration products to make your space
-            stylish & comfortable.
-          </p>
-        </div>
+    <footer className="bg-[#1C1917] text-[#FAF8F5] pt-16 pb-12 mt-20 border-t border-[#2E2925]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16 pb-12 border-b border-[#2E2925]">
+          {/* Brand Column */}
+          <div className="md:col-span-5 space-y-4">
+            <div>
+              <span className="text-2xl font-bold tracking-wider uppercase block">
+                TK FURNITURE
+              </span>
+              <span className="text-xs text-[#C5A880] tracking-[0.2em] uppercase font-semibold">
+                Addis Ababa, Ethiopia
+              </span>
+            </div>
+            <p className="text-[#A8A29E] text-base leading-relaxed max-w-sm">
+              Quality furniture, crafted for real life. Bespoke craftsmanship and curated room collections rooted in authentic materials.
+            </p>
+            <div className="pt-2">
+              <span className="inline-block text-xs uppercase tracking-wider text-[#A8A29E] bg-[#292524] px-3 py-1.5 rounded-md border border-[#3B3632]">
+                Showroom: Bole Road, Addis Ababa
+              </span>
+            </div>
+          </div>
 
-        {/* Links */}
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Quick Links</h3>
-          <ul className="space-y-2">
-            <li>
-              <a href="/" className="hover:text-cyan-600 transition">Home</a>
-            </li>
-            <li>
-              <a href="/product" className="hover:text-cyan-600 transition">Products</a>
-            </li>
-            <li>
-              <a href="/whislist" className="hover:text-cyan-600 transition">Whislist</a>
-            </li>
-          </ul>
-        </div>
+          {/* Quick Links Column */}
+          <div className="md:col-span-4 space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-[#C5A880]">
+              Quick Links
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link
+                  to="/about"
+                  className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  <span>About Us & Workshop</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/catalog"
+                  className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  <span>Product Catalog</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/projects"
+                  className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  <span>Completed Projects</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  <span>Inquiry & Contact</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-        {/* Contact */}
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Contact Us</h3>
-          <p className="text-sm">Dhaka, Bangladesh</p>
-          <p className="text-sm">Email: support@homedecor.com</p>
-          <p className="text-sm">Phone: +880 1234 567 890</p>
-          <div className="flex gap-3 mt-3">
-            <a href="#" className="hover:text-cyan-600">
-              <i className="fab fa-facebook text-xl"></i>
-            </a>
-            <a href="#" className="hover:text-cyan-600">
-              <i className="fab fa-instagram text-xl"></i>
-            </a>
-            <a href="#" className="hover:text-cyan-600">
-              <i className="fab fa-twitter text-xl"></i>
-            </a>
+          {/* Social Links & Hours Column */}
+          <div className="md:col-span-3 space-y-4">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-[#C5A880]">
+              Follow Us
+            </h3>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-xs font-bold transition-all border border-[#3B3632]"
+                aria-label="Facebook"
+              >
+                FB
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-xs font-bold transition-all border border-[#3B3632]"
+                aria-label="Instagram"
+              >
+                IG
+              </a>
+              <a
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-xs font-bold transition-all border border-[#3B3632]"
+                aria-label="TikTok"
+              >
+                TikTok
+              </a>
+            </div>
+            <div className="pt-2 text-xs text-[#A8A29E] space-y-1">
+              <p className="font-medium text-[#D6D3D1]">Visiting Hours</p>
+              <p>Mon–Sat: 9:00 – 18:00</p>
+              <p>Sunday: By Appointment</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom */}
-      <div className="border-t border-gray-300 py-4 text-center text-sm text-gray-600">
-        © {new Date().getFullYear()} HomeDecor. All rights reserved.
-        <p>Developed By Amdad Islam</p>
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#78716C]">
+          <p>© 2026 TK Furniture — Addis Ababa, Ethiopia. All rights reserved.</p>
+          <p className="tracking-wide">Designed according to August 2026 UX Specification</p>
+        </div>
       </div>
     </footer>
   );

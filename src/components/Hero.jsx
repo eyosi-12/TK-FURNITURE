@@ -1,49 +1,47 @@
 import React from "react";
 import { Link } from "react-router";
-
+import HeroCarousel from "./HeroCarousel";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20 mt-4 md:mt-10 lg:px-12 grid md:grid-cols-2 gap-12 items-center">
-        
-        {/* Left Content */}
-        <div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-            Elevate Your Home with <span className="text-cyan-600">Premium Furniture</span>
-          </h1>
-          <p className="mt-6 text-lg text-gray-600 leading-relaxed">
-            Discover modern and timeless furniture pieces crafted from the best materials.  
-            Style, comfort, and durability – all in one place.
-          </p>
+    <div className="max-w-7xl mx-auto px-6 py-16 lg:py-24 grid md:grid-cols-12 gap-12 items-center">
+      {/* Left Content */}
+      <div className="md:col-span-7 space-y-6">
+        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5] text-xs font-semibold uppercase tracking-widest text-[#8A5333] border border-[#E5DFD5]">
+          <Sparkles className="w-3.5 h-3.5" />
+          Crafted in Addis Ababa · Ethiopia
+        </span>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1C1917] leading-tight">
+          Furniture that fits your <span className="text-[#8A5333]">story.</span>
+        </h1>
+        <p className="text-base sm:text-lg text-[#57534E] leading-relaxed max-w-xl">
+          Thoughtfully proportioned, handcrafted timber pieces and bespoke upholstery designed for Ethiopian homes, creative studios, and modern living spaces.
+        </p>
 
-          {/* CTA Buttons */}
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link to={'/product'}
-              className="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl shadow-lg flex items-center gap-2 transition"
-            >
-              Shop Now 
-            </Link>
-            <a
-              href="/about"
-              className="px-6 py-3 border border-cyan-600 text-cyan-600 hover:bg-cyan-50 rounded-xl transition"
-            >
-              Learn More
-            </a>
-          </div>
-        </div>
-
-        {/* Right Image */}
-        <div className="relative mr-0 md:mr-6">
-          <img
-            src="https://i.ibb.co.com/NgbhqnC6/Furniture-Collection.png"
-            alt="Furniture"
-            className="rounded-3xl shadow-xl object-cover w-full h-[400px]"
-          />
-          {/* Decorative Shape */}
-          <div className="absolute -top-6 -left-6 w-28 h-28 bg-cyan-100 rounded-full -z-10"></div>
-          <div className="absolute -bottom-8 -right-8 w-36 h-36 bg-cyan-200 rounded-full -z-10"></div>
+        {/* CTA Buttons */}
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link
+            to="/catalog"
+            className="px-7 py-3.5 bg-[#8A5333] hover:bg-[#6E3F24] text-white font-medium text-sm tracking-wider uppercase rounded-xl shadow-md hover:shadow-lg flex items-center gap-2 transition"
+          >
+            Shop the Catalog
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            to="/about"
+            className="px-6 py-3.5 bg-white border border-[#DCD6CC] text-[#1C1917] hover:bg-[#FAF8F5] rounded-xl transition text-sm font-medium"
+          >
+            Our Workshop Story
+          </Link>
         </div>
       </div>
+
+      {/* Right Carousel Slider */}
+      <div className="md:col-span-5 relative">
+        <HeroCarousel />
+      </div>
+    </div>
   );
 };
 

@@ -32,10 +32,10 @@ const WhyChooseUs = () => {
     <section className="bg-gray-50 py-16 mt-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-          WHY CUSTOMERS CHOOSE <span className="text-cyan-600">HOME DECOR</span>
+          WHY CUSTOMERS CHOOSE <span className="text-cyan-600">TK FURNITURE</span>
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto mb-12">
-          At home Furniture, we don’t just sell furniture — we bring elegance, comfort, and 
+          At TK Furniture, we don’t just sell furniture — we bring elegance, comfort, and 
           durability into your home. Here’s why people trust us:
         </p>
 

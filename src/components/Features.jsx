@@ -35,7 +35,7 @@ const Features = () => {
           Our <span className="text-cyan-600">Features</span>
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto mb-12">
-          Discover why Hatim Furniture stands out in the market with features designed 
+          Discover why TK Furniture stands out in the market with features designed 
           to bring style, comfort, and value to your home.
         </p>
 

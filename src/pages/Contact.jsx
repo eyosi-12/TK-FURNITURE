@@ -8,8 +8,12 @@ import {
   Send, 
   CheckCircle2, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Map,
+  Image,
+  ArrowUpRight
 } from "lucide-react";
+import LocationMap from "../components/LocationMap";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
@@ -26,6 +30,7 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [mediaTab, setMediaTab] = useState("map");
 
   useEffect(() => {
     if (subjectParam) {
@@ -216,21 +221,68 @@ const Contact = () => {
         </div>
 
         {/* Right Column: Showroom Visual, Address, Hours & Social - Wireframe Figure 9 */}
-        <div className="lg:col-span-5 space-y-8">
-          {/* Showroom Photo / Interactive Map card */}
-          <div className="relative aspect-[16/10] rounded-3xl overflow-hidden shadow-md border border-[#E7E2D9] bg-[#EAE5DC]">
-            <img
-              src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=800&q=80"
-              alt="TK Furniture Showroom Bole Addis Ababa"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#E5DFD5]">
-                Showroom & Design Studio
-              </span>
-              <p className="text-sm font-semibold">Bole Road, Addis Ababa</p>
+        <div className="lg:col-span-5 space-y-6">
+          {/* View Mode Switcher Header */}
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1 p-1 bg-[#F1ECE4] rounded-2xl border border-[#E7E2D9]">
+              <button
+                type="button"
+                onClick={() => setMediaTab("map")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  mediaTab === "map"
+                    ? "bg-white text-[#8A5333] shadow-xs"
+                    : "text-[#57534E] hover:text-[#1C1917]"
+                }`}
+              >
+                <Map className="w-3.5 h-3.5" />
+                <span>Interactive Map</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setMediaTab("photo")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  mediaTab === "photo"
+                    ? "bg-white text-[#8A5333] shadow-xs"
+                    : "text-[#57534E] hover:text-[#1C1917]"
+                }`}
+              >
+                <Image className="w-3.5 h-3.5" />
+                <span>Showroom Photo</span>
+              </button>
             </div>
+
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=9.0002,38.8089"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold text-[#8A5333] hover:text-[#6E3F24] inline-flex items-center gap-1 transition-colors"
+            >
+              <span>Get Directions</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Showroom Photo / Interactive Map Card */}
+          <div className="h-[360px] sm:h-[400px] w-full">
+            {mediaTab === "map" ? (
+              <LocationMap className="h-full" />
+            ) : (
+              <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-md border border-[#E7E2D9] bg-[#EAE5DC]">
+                <img
+                  src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=800&q=80"
+                  alt="TK Furniture Showroom Addis Ababa"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#E5DFD5]">
+                    Showroom & Design Studio
+                  </span>
+                  <p className="text-sm font-semibold">Unity University Campus Area, Gerji</p>
+                  <p className="text-xs text-[#D6D3D1]">Addis Ababa, Ethiopia</p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Visit Our Showroom Details */}
@@ -243,8 +295,22 @@ const Contact = () => {
               <div className="flex items-start gap-3.5">
                 <MapPin className="w-5 h-5 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-[#1C1917]">Studio Address</p>
-                  <p>Bole Road (near Atlas Junction), Addis Ababa, Ethiopia</p>
+                  <p className="font-semibold text-[#1C1917]">Studio & Showroom Address</p>
+                  <p>Unity University Campus Area, Gerji, Addis Ababa, Ethiopia</p>
+                  <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                    <span className="inline-flex items-center text-[11px] font-mono text-[#78716C] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E7E2D9]">
+                      9.0002° N, 38.8089° E
+                    </span>
+                    <a
+                      href="https://www.google.com/maps/dir/?api=1&destination=9.0002,38.8089"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#8A5333] hover:underline"
+                    >
+                      <span>Open in Maps</span>
+                      <ArrowUpRight className="w-3 h-3" />
+                    </a>
+                  </div>
                 </div>
               </div>
 

@@ -14,14 +14,18 @@ import {
   Layers, 
   Clock 
 } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { products, loading, error } = useProducts();
+  const { t, localizeProduct, localizeCategory, formatPrice } = useLanguage();
 
-  const product = Array.isArray(products)
+  const rawProduct = Array.isArray(products)
     ? products.find((p) => String(p.id) === String(id))
     : null;
+
+  const product = rawProduct ? (localizeProduct(rawProduct) || rawProduct) : null;
 
   // Active gallery image state
   const [activeImage, setActiveImage] = useState("");
@@ -37,21 +41,21 @@ const ProductDetails = () => {
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [product, id]);
+  }, [id, rawProduct]);
 
   if (loading) return <Loader />;
 
   if (!product) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-4">
-        <h2 className="text-2xl font-bold text-[#1C1917]">Product Not Found</h2>
-        <p className="text-sm text-[#78716C]">The piece you are looking for may have been retired or moved.</p>
+        <h2 className="text-2xl font-bold text-[#1C1917]">{t("productDetails.notFoundTitle")}</h2>
+        <p className="text-sm text-[#78716C]">{t("productDetails.notFoundDesc")}</p>
         <Link
           to="/catalog"
           className="inline-flex items-center gap-2 px-6 py-3 bg-[#8A5333] text-white text-xs font-semibold uppercase tracking-wider rounded-xl hover:bg-[#6E3F24] transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Return to Catalog</span>
+          <span>{t("productDetails.returnToCatalog")}</span>
         </Link>
       </div>
     );
@@ -60,7 +64,7 @@ const ProductDetails = () => {
   // Related products from same category or fallback (3 cards matching wireframe)
   const relatedProducts = Array.isArray(products)
     ? products
-        .filter((p) => p.id !== product.id && p.category === product.category)
+        .filter((p) => p.id !== rawProduct.id && p.category === rawProduct.category)
         .slice(0, 3)
     : [];
 
@@ -79,20 +83,18 @@ const ProductDetails = () => {
     }
   };
 
-  const formattedPrice = product.price
-    ? `ETB ${product.price.toLocaleString()}`
-    : "Price on Request";
+  const formattedPrice = formatPrice(product.price);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-16">
       {/* Breadcrumb Navigation - Wireframe Figure 7 */}
       <nav className="text-xs text-[#78716C] flex items-center gap-2 flex-wrap">
-        <Link to="/" className="hover:text-[#1C1917]">Home</Link>
+        <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
         <span>/</span>
-        <Link to="/catalog" className="hover:text-[#1C1917]">Catalog</Link>
+        <Link to="/catalog" className="hover:text-[#1C1917]">{t("catalog.breadcrumb")}</Link>
         <span>/</span>
         <Link 
-          to={`/catalog?category=${encodeURIComponent(product.category)}`} 
+          to={`/catalog?category=${encodeURIComponent(rawProduct.category)}`} 
           className="hover:text-[#1C1917]"
         >
           {product.category}
@@ -162,7 +164,7 @@ const ProductDetails = () => {
           {/* Specifications Box - Wireframe Figure 7 */}
           <div className="bg-white border border-[#E7E2D9] rounded-2xl p-6 space-y-4 shadow-xs">
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#78716C]">
-              Specifications & Details
+              {t("productDetails.featuresTitle")}
             </h3>
 
             <div className="space-y-3 text-sm text-[#44403C]">
@@ -170,7 +172,7 @@ const ProductDetails = () => {
               <div className="flex items-start gap-3">
                 <Ruler className="w-4 h-4 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <span className="font-semibold text-[#1C1917]">Dimensions: </span>
+                  <span className="font-semibold text-[#1C1917]">{t("productDetails.dimensions")}: </span>
                   <span>{product.dimensions}</span>
                 </div>
               </div>
@@ -179,7 +181,7 @@ const ProductDetails = () => {
               <div className="flex items-start gap-3">
                 <Layers className="w-4 h-4 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <span className="font-semibold text-[#1C1917]">Material: </span>
+                  <span className="font-semibold text-[#1C1917]">{t("productDetails.material")}: </span>
                   <span>{product.material}</span>
                 </div>
               </div>
@@ -188,7 +190,7 @@ const ProductDetails = () => {
               {product.colors && product.colors.length > 0 && (
                 <div className="pt-1">
                   <span className="font-semibold text-[#1C1917] block mb-2">
-                    Available Finishes / Colors:
+                    {t("productDetails.selectColor")}:
                   </span>
                   <div className="flex items-center gap-3">
                     {product.colors.map((color) => (
@@ -225,7 +227,7 @@ const ProductDetails = () => {
               <div className="flex items-start gap-3 pt-1">
                 <Clock className="w-4 h-4 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <span className="font-semibold text-[#1C1917]">Lead Time: </span>
+                  <span className="font-semibold text-[#1C1917]">{t("productDetails.leadTime")}: </span>
                   <span>{product.leadTime || "2-3 weeks (Addis Ababa Delivery)"}</span>
                 </div>
               </div>
@@ -239,21 +241,21 @@ const ProductDetails = () => {
               className="w-full py-4 px-6 bg-[#8A5333] hover:bg-[#6E3F24] text-white font-semibold text-sm uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
             >
               <Send className="w-4 h-4" />
-              <span>Inquire About This Piece</span>
+              <span>{t("productDetails.requestInquiry")}</span>
             </button>
 
             <Link
               to={`/contact?subject=${encodeURIComponent(`Inquiry: ${product.name}`)}`}
               className="w-full py-3 px-6 bg-white hover:bg-[#F3EFEA] text-[#1C1917] border border-[#D6D3D1] font-semibold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5"
             >
-              <span>Visit Showroom to View Samples</span>
+              <span>{t("nav.inquireVisit")}</span>
             </Link>
           </div>
 
-          {/* Social Share Strip - Wireframe Figure 7: Share: [FB] [IG] [WhatsApp] */}
+          {/* Social Share Strip */}
           <div className="pt-4 border-t border-[#E7E2D9] flex items-center justify-between text-xs text-[#78716C]">
             <span className="font-bold uppercase tracking-wider text-[#1C1917]">
-              Share This Piece:
+              {t("productDetails.sharePiece")}:
             </span>
             <div className="flex items-center gap-2">
               <button
@@ -267,7 +269,7 @@ const ProductDetails = () => {
                 className="px-2.5 py-1.5 rounded-lg bg-white border border-[#D6D3D1] text-[#1C1917] hover:border-[#8A5333] hover:text-[#8A5333] font-semibold transition-colors"
                 title="Copy Link for Instagram / Direct share"
               >
-                {shareCopied ? "Copied!" : "IG / Link"}
+                {shareCopied ? t("productDetails.linkCopied") : "IG / Link"}
               </button>
               <button
                 onClick={() => handleShare("whatsapp")}
@@ -285,13 +287,13 @@ const ProductDetails = () => {
         <section className="pt-12 border-t border-[#E7E2D9] space-y-8">
           <div className="flex items-baseline justify-between">
             <h2 className="text-2xl font-bold text-[#1C1917]">
-              Related Products
+              {t("productDetails.relatedTitle")}
             </h2>
             <Link
-              to={`/catalog?category=${encodeURIComponent(product.category)}`}
+              to={`/catalog?category=${encodeURIComponent(rawProduct.category)}`}
               className="text-xs font-semibold uppercase tracking-wider text-[#8A5333] hover:text-[#6E3F24]"
             >
-              View More in {product.category}
+              {t("home.viewFullCatalog")}
             </Link>
           </div>
 
@@ -300,7 +302,7 @@ const ProductDetails = () => {
               <ProductCard
                 key={relProduct.id}
                 item={relProduct}
-                buttonText="View"
+                buttonText={t("catalog.view")}
               />
             ))}
           </div>

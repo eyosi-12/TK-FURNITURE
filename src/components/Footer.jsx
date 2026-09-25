@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
 const Footer = () => {
+  const { t, isAmharic } = useLanguage();
+
   return (
     <footer className="bg-[#1C1917] text-[#FAF8F5] pt-16 pb-12 mt-20 border-t border-[#2E2925]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,19 +22,19 @@ const Footer = () => {
               </div>
               <div>
                 <span className="text-2xl font-bold tracking-wider uppercase block">
-                  TK FURNITURE
+                  {isAmharic ? "ቲኬ ፈርኒቸር" : "TK FURNITURE"}
                 </span>
                 <span className="text-xs text-[#C5A880] tracking-[0.2em] uppercase font-semibold">
-                  Addis Ababa, Ethiopia
+                  {t("nav.studioBadge")}
                 </span>
               </div>
             </div>
             <p className="text-[#A8A29E] text-base leading-relaxed max-w-sm">
-              Quality furniture, crafted for real life. Bespoke craftsmanship and curated room collections rooted in authentic materials.
+              {t("footer.tagline")}
             </p>
             <div className="pt-2">
               <span className="inline-block text-xs uppercase tracking-wider text-[#A8A29E] bg-[#292524] px-3 py-1.5 rounded-md border border-[#3B3632]">
-                Showroom: Bole Road, Addis Ababa
+                {t("footer.showroomLocation")}
               </span>
             </div>
           </div>
@@ -39,7 +42,7 @@ const Footer = () => {
           {/* Quick Links Column */}
           <div className="md:col-span-4 space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#C5A880]">
-              Quick Links
+              {t("footer.quickLinks")}
             </h3>
             <ul className="space-y-2.5">
               <li>
@@ -47,7 +50,7 @@ const Footer = () => {
                   to="/about"
                   className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
                 >
-                  <span>About Us & Workshop</span>
+                  <span>{t("footer.aboutWorkshop")}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
                 </Link>
               </li>
@@ -56,7 +59,7 @@ const Footer = () => {
                   to="/catalog"
                   className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
                 >
-                  <span>Product Catalog</span>
+                  <span>{t("footer.productCatalog")}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
                 </Link>
               </li>
@@ -65,7 +68,7 @@ const Footer = () => {
                   to="/projects"
                   className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
                 >
-                  <span>Completed Projects</span>
+                  <span>{t("footer.completedProjects")}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
                 </Link>
               </li>
@@ -74,7 +77,7 @@ const Footer = () => {
                   to="/contact"
                   className="text-sm text-[#D6D3D1] hover:text-white transition-colors flex items-center gap-1.5"
                 >
-                  <span>Inquiry & Contact</span>
+                  <span>{t("footer.inquiryContact")}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
                 </Link>
               </li>
@@ -84,7 +87,7 @@ const Footer = () => {
           {/* Social Links & Hours Column */}
           <div className="md:col-span-3 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#C5A880]">
-              Follow Us
+              {t("footer.followUs")}
             </h3>
             <div className="flex items-center gap-3">
               <a
@@ -116,17 +119,17 @@ const Footer = () => {
               </a>
             </div>
             <div className="pt-2 text-xs text-[#A8A29E] space-y-1">
-              <p className="font-medium text-[#D6D3D1]">Visiting Hours</p>
-              <p>Mon–Sat: 9:00 – 18:00</p>
-              <p>Sunday: By Appointment</p>
+              <p className="font-medium text-[#D6D3D1]">{t("footer.visitingHours")}</p>
+              <p>{t("footer.hoursWeek")}</p>
+              <p>{t("footer.hoursSun")}</p>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#78716C]">
-          <p>© 2026 TK Furniture — Addis Ababa, Ethiopia. All rights reserved.</p>
-          <p className="tracking-wide">Designed according to August 2026 UX Specification</p>
+          <p>{t("footer.copyright")}</p>
+          <p className="tracking-wide">{t("footer.designSpec")}</p>
         </div>
       </div>
     </footer>

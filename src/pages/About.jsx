@@ -7,33 +7,31 @@ import {
   Hammer,
   Leaf,
   Compass,
-  MapPin
 } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
 const About = () => {
+  const { t } = useLanguage();
+
   const values = [
     {
-      title: "Authentic Materials",
-      description:
-        "We source sustainably harvested timber including Ethiopian Wanza, Tid (highland juniper), and kiln-dried European white oak alongside natural linen and full-grain leather.",
+      title: t("about.values.materials.title"),
+      description: t("about.values.materials.desc"),
       icon: Leaf,
     },
     {
-      title: "Master Joinery",
-      description:
-        "Every joint, mortise, and tenon is cut with exactitude by senior artisans in our Addis Ababa workshop, designed to endure generations of living.",
+      title: t("about.values.joinery.title"),
+      description: t("about.values.joinery.desc"),
       icon: Hammer,
     },
     {
-      title: "Bespoke Proportions",
-      description:
-        "Furniture should fit both your space and your rhythm of life. We customize lengths, depths, wood stains, and fabric finishes for individual clients.",
+      title: t("about.values.proportions.title"),
+      description: t("about.values.proportions.desc"),
       icon: Compass,
     },
     {
-      title: "Enduring Guarantee",
-      description:
-        "We stand behind the structural integrity of our frames with comprehensive workshop support and long-term care guidelines.",
+      title: t("about.values.guarantee.title"),
+      description: t("about.values.guarantee.desc"),
       icon: ShieldCheck,
     },
   ];
@@ -43,9 +41,9 @@ const About = () => {
       {/* Breadcrumb Navigation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="text-xs text-[#78716C] flex items-center gap-2">
-          <Link to="/" className="hover:text-[#1C1917]">Home</Link>
+          <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
           <span>/</span>
-          <span className="text-[#1C1917] font-semibold">About Us</span>
+          <span className="text-[#1C1917] font-semibold">{t("about.breadcrumb")}</span>
         </nav>
       </div>
 
@@ -55,16 +53,16 @@ const About = () => {
           <div className="lg:col-span-7 space-y-6">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5] text-xs font-semibold uppercase tracking-widest text-[#8A5333] border border-[#E5DFD5]">
               <Sparkles className="w-3.5 h-3.5" />
-              Our Story & Heritage
+              {t("about.badge")}
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C1917] leading-[1.15]">
-              Crafting furniture with quiet confidence in Addis Ababa.
+              {t("about.title")}
             </h1>
             <p className="text-base sm:text-lg text-[#57534E] leading-relaxed">
-              Founded in Addis Ababa, our studio was born from a desire to bridge traditional Ethiopian carpentry heritage with modern architectural simplicity. We believe furniture should not be disposable—it should age gracefully with your home, gathering character with every year.
+              {t("about.p1")}
             </p>
             <p className="text-base text-[#57534E] leading-relaxed">
-              From our Bole Road workshop, our team of passionate woodworkers, upholsterers, and designers collaborate directly with homeowners, architects, and interior stylists to build thoughtful, resilient living environments.
+              {t("about.p2")}
             </p>
           </div>
 
@@ -78,27 +76,27 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white">
                 <p className="text-xs uppercase tracking-widest text-[#FAF8F5]/80 font-medium">
-                  Studio Atelier
+                  {t("about.studioAtelier")}
                 </p>
-                <p className="text-sm font-semibold">Bole Road Workshop, Addis Ababa</p>
+                <p className="text-sm font-semibold">{t("about.workshopLocation")}</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission & Values Section - Wireframe Sitemap */}
+      {/* Mission & Values Section */}
       <section className="bg-[#F4EFE6] border-y border-[#E4DCD0] py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333]">
-              What We Stand For
+              {t("about.whatWeStandFor")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#1C1917]">
-              Mission & Core Values
+              {t("about.missionTitle")}
             </h2>
             <p className="text-sm sm:text-base text-[#57534E]">
-              Our principles define every cut of wood, choice of fabric, and interaction with our clients.
+              {t("about.missionSubtitle")}
             </p>
           </div>
 
@@ -126,7 +124,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Workshop Process Section */}
+      {/* Workshop Process / Atelier Experience Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1">
@@ -150,29 +148,28 @@ const About = () => {
 
           <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
             <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-              The Atelier Experience
+              {t("about.badge")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#1C1917]">
-              Visit our Addis Ababa workshop and showroom.
+              {t("about.showroomBanner.title")}
             </h2>
             <p className="text-[#57534E] text-base leading-relaxed">
-              We welcome private clients, architects, and designers to browse fabric swatches, inspect wood grain variations, and touch finished pieces in person. Our design consultants can guide you through tailored room layouts and bespoke commissions.
+              {t("about.showroomBanner.desc")}
             </p>
 
-            {/* User Flow 2 Connection: "Click 'Our Projects' to see real-world work" */}
             <div className="pt-4 flex flex-wrap gap-4">
               <Link
                 to="/projects"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#8A5333] hover:bg-[#6E3F24] text-white text-xs font-semibold uppercase tracking-wider rounded-xl transition-all shadow-md"
               >
-                <span>View Our Completed Projects</span>
+                <span>{t("projects.title")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-white border border-[#D6D3D1] hover:bg-[#F3EFEA] text-[#1C1917] text-xs font-semibold uppercase tracking-wider rounded-xl transition-all"
               >
-                <span>Contact & Consultation</span>
+                <span>{t("nav.contact")}</span>
               </Link>
             </div>
           </div>

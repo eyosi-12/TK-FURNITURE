@@ -7,18 +7,18 @@ import {
   Clock, 
   Send, 
   CheckCircle2, 
-  Sparkles,
-  ArrowRight,
-  Map,
-  Image,
-  ArrowUpRight
+  Map, 
+  Image, 
+  ArrowUpRight 
 } from "lucide-react";
 import LocationMap from "../components/LocationMap";
+import { useLanguage } from "../Context/LanguageContext";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
   const subjectParam = searchParams.get("subject") || "";
   const typeParam = searchParams.get("type") || "";
+  const { t, localizeCategory } = useLanguage();
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -51,32 +51,31 @@ const Contact = () => {
   };
 
   const projectTypes = [
-    "Living Room",
-    "Bedroom",
-    "Kitchen & Dining",
-    "Office / Commercial",
-    "Full Apartment / Villa",
-    "Custom Joinery Build",
-    "Bulk / Interior Designer Sourcing",
-    "General Inquiry",
+    { value: "Living Room", label: localizeCategory("Living Room") },
+    { value: "Bedroom", label: localizeCategory("Bedroom") },
+    { value: "Kitchen & Dining", label: localizeCategory("Kitchen") },
+    { value: "Office / Commercial", label: localizeCategory("Office") },
+    { value: "Apartment / Villa", label: localizeCategory("Apartment") },
+    { value: "Custom Joinery Build", label: "Custom Joinery Build" },
+    { value: "General Inquiry", label: "General Inquiry" },
   ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12">
       {/* Breadcrumb Navigation - Wireframe Figure 9 */}
       <nav className="text-xs text-[#78716C] flex items-center gap-2">
-        <Link to="/" className="hover:text-[#1C1917]">Home</Link>
+        <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
         <span>/</span>
-        <span className="text-[#1C1917] font-semibold">Contact</span>
+        <span className="text-[#1C1917] font-semibold">{t("contact.breadcrumb")}</span>
       </nav>
 
       {/* Title & Subtitle - Wireframe Figure 9 */}
       <div className="space-y-2 border-b border-[#E7E2D9] pb-8">
         <h1 className="text-3xl sm:text-5xl font-bold text-[#1C1917]">
-          Contact Us
+          {t("contact.title")}
         </h1>
         <p className="text-base sm:text-lg text-[#57534E]">
-          Have a project in mind? Send us a message.
+          {t("contact.subtitle")}
         </p>
       </div>
 
@@ -91,17 +90,17 @@ const Contact = () => {
               </div>
               <div className="space-y-2">
                 <h3 className="text-2xl font-bold text-[#1C1917]">
-                  Thank You for Reaching Out!
+                  {t("contact.successTitle")}
                 </h3>
                 <p className="text-sm text-[#57534E] max-w-md mx-auto leading-relaxed">
-                  Your inquiry has been delivered directly to our Addis Ababa studio team. We will review your project requirements and connect with you shortly.
+                  {t("contact.successDesc")}
                 </p>
               </div>
 
               <div className="bg-[#FAF8F5] border border-[#E7E2D9] p-5 rounded-2xl max-w-md mx-auto text-left text-xs space-y-2 text-[#44403C]">
-                <p><span className="font-semibold text-[#1C1917]">Client:</span> {formData.fullName}</p>
-                <p><span className="font-semibold text-[#1C1917]">Phone:</span> {formData.phone}</p>
-                <p><span className="font-semibold text-[#1C1917]">Project Type:</span> {formData.projectType}</p>
+                <p><span className="font-semibold text-[#1C1917]">{t("contact.fullName")}:</span> {formData.fullName}</p>
+                <p><span className="font-semibold text-[#1C1917]">{t("contact.phone")}:</span> {formData.phone}</p>
+                <p><span className="font-semibold text-[#1C1917]">{t("contact.projectType")}:</span> {formData.projectType}</p>
               </div>
 
               <div className="pt-4 flex justify-center gap-3">
@@ -118,13 +117,13 @@ const Contact = () => {
                   }}
                   className="px-6 py-2.5 bg-[#8A5333] text-white text-xs font-semibold uppercase tracking-wider rounded-xl hover:bg-[#6E3F24] transition-colors"
                 >
-                  Send Another Inquiry
+                  {t("contact.sendAnother")}
                 </button>
                 <Link
                   to="/catalog"
                   className="px-6 py-2.5 bg-white border border-[#D6D3D1] text-[#1C1917] text-xs font-semibold uppercase tracking-wider rounded-xl hover:bg-[#F3EFEA] transition-colors"
                 >
-                  Browse Catalog
+                  {t("home.shopCatalog")}
                 </Link>
               </div>
             </div>
@@ -133,12 +132,12 @@ const Contact = () => {
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#44403C] mb-2">
-                  Full Name *
+                  {t("contact.fullName")} *
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Eyosias Belay"
+                  placeholder={t("contact.fullNamePlaceholder")}
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#D6D3D1] rounded-xl text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] focus:bg-white transition-all"
@@ -149,12 +148,12 @@ const Contact = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#44403C] mb-2">
-                    Phone Number *
+                    {t("contact.phone")} *
                   </label>
                   <input
                     type="tel"
                     required
-                    placeholder="+251 9XX XXX XXX"
+                    placeholder={t("contact.phonePlaceholder")}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#D6D3D1] rounded-xl text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] focus:bg-white transition-all"
@@ -162,11 +161,11 @@ const Contact = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-[#44403C] mb-2">
-                    Email Address
+                    {t("contact.email")}
                   </label>
                   <input
                     type="email"
-                    placeholder="name@domain.com"
+                    placeholder={t("contact.emailPlaceholder")}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#D6D3D1] rounded-xl text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] focus:bg-white transition-all"
@@ -174,19 +173,19 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Project Type Dropdown - Wireframe Figure 9 */}
+              {/* Project Type Dropdown */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#44403C] mb-2">
-                  Project Type
+                  {t("contact.projectType")}
                 </label>
                 <select
                   value={formData.projectType}
                   onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
                   className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#D6D3D1] rounded-xl text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] focus:bg-white transition-all cursor-pointer"
                 >
-                  {projectTypes.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
+                  {projectTypes.map((pt) => (
+                    <option key={pt.value} value={pt.value}>
+                      {pt.label}
                     </option>
                   ))}
                 </select>
@@ -195,32 +194,32 @@ const Contact = () => {
               {/* Message Textarea */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#44403C] mb-2">
-                  Message / Room Details
+                  {t("contact.message")} *
                 </label>
                 <textarea
                   rows={4}
                   required
-                  placeholder="Tell us about the space you are furnishing, required dimensions, or timelines..."
+                  placeholder={t("contact.messagePlaceholder")}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-4 py-3 bg-[#FAF8F5] border border-[#D6D3D1] rounded-xl text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] focus:bg-white transition-all resize-none"
                 />
               </div>
 
-              {/* Send Message CTA Button - Wireframe Figure 9 */}
+              {/* Send Message CTA Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full sm:w-auto px-8 py-4 bg-[#8A5333] hover:bg-[#6E3F24] text-white font-semibold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2"
               >
                 <Send className="w-4 h-4" />
-                <span>{isSubmitting ? "Sending Inquiry..." : "Send Message"}</span>
+                <span>{isSubmitting ? t("contact.sending") : t("contact.submit")}</span>
               </button>
             </form>
           )}
         </div>
 
-        {/* Right Column: Showroom Visual, Address, Hours & Social - Wireframe Figure 9 */}
+        {/* Right Column: Showroom Visual, Address, Hours & Social */}
         <div className="lg:col-span-5 space-y-6">
           {/* View Mode Switcher Header */}
           <div className="flex items-center justify-between gap-2">
@@ -235,7 +234,7 @@ const Contact = () => {
                 }`}
               >
                 <Map className="w-3.5 h-3.5" />
-                <span>Interactive Map</span>
+                <span>{t("contact.mapTab")}</span>
               </button>
               <button
                 type="button"
@@ -247,7 +246,7 @@ const Contact = () => {
                 }`}
               >
                 <Image className="w-3.5 h-3.5" />
-                <span>Showroom Photo</span>
+                <span>{t("contact.photosTab")}</span>
               </button>
             </div>
 
@@ -257,7 +256,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="text-xs font-semibold text-[#8A5333] hover:text-[#6E3F24] inline-flex items-center gap-1 transition-colors"
             >
-              <span>Get Directions</span>
+              <span>{t("contact.getDirectionsBtn")}</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -276,9 +275,9 @@ const Contact = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#E5DFD5]">
-                    Showroom & Design Studio
+                    {t("contact.showroomSubtitle")}
                   </span>
-                  <p className="text-sm font-semibold">Unity University Campus Area, Gerji</p>
+                  <p className="text-sm font-semibold">{t("contact.address")}</p>
                   <p className="text-xs text-[#D6D3D1]">Addis Ababa, Ethiopia</p>
                 </div>
               </div>
@@ -288,15 +287,15 @@ const Contact = () => {
           {/* Visit Our Showroom Details */}
           <div className="bg-white rounded-3xl border border-[#E7E2D9] p-6 sm:p-8 space-y-6 shadow-xs">
             <h2 className="text-xl font-bold text-[#1C1917]">
-              Visit Our Showroom
+              {t("contact.showroomSubtitle")}
             </h2>
 
             <div className="space-y-4 text-sm text-[#57534E]">
               <div className="flex items-start gap-3.5">
                 <MapPin className="w-5 h-5 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-[#1C1917]">Studio & Showroom Address</p>
-                  <p>Unity University Campus Area, Gerji, Addis Ababa, Ethiopia</p>
+                  <p className="font-semibold text-[#1C1917]">{t("footer.showroomLocation")}</p>
+                  <p>{t("contact.address")}</p>
                   <div className="flex flex-wrap items-center gap-2 mt-1.5">
                     <span className="inline-flex items-center text-[11px] font-mono text-[#78716C] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E7E2D9]">
                       9.0002° N, 38.8089° E
@@ -307,7 +306,7 @@ const Contact = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-xs font-semibold text-[#8A5333] hover:underline"
                     >
-                      <span>Open in Maps</span>
+                      <span>{t("contact.viewOnMaps")}</span>
                       <ArrowUpRight className="w-3 h-3" />
                     </a>
                   </div>
@@ -317,33 +316,33 @@ const Contact = () => {
               <div className="flex items-start gap-3.5">
                 <Phone className="w-5 h-5 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-[#1C1917]">Telephone</p>
-                  <p>+251 911 234 567 / +251 922 890 123</p>
+                  <p className="font-semibold text-[#1C1917]">{t("contact.phone")}</p>
+                  <p>{t("contact.phoneValue")}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5">
                 <Mail className="w-5 h-5 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-[#1C1917]">Direct Email</p>
-                  <p>hello@tkfurniture.com</p>
+                  <p className="font-semibold text-[#1C1917]">{t("contact.email")}</p>
+                  <p>{t("contact.emailValue")}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5">
                 <Clock className="w-5 h-5 text-[#8A5333] mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-semibold text-[#1C1917]">Business Hours</p>
-                  <p>Mon–Sat: 9:00 – 18:00</p>
-                  <p className="text-xs text-[#78716C] mt-0.5">Sundays: By appointment for custom design consultations</p>
+                  <p className="font-semibold text-[#1C1917]">{t("footer.visitingHours")}</p>
+                  <p>{t("contact.hoursWeekday")}</p>
+                  <p className="text-xs text-[#78716C] mt-0.5">{t("contact.hoursSunday")}</p>
                 </div>
               </div>
             </div>
 
-            {/* Social Links - Wireframe Figure 9: Follow us: [FB] [IG] [TikTok] */}
+            {/* Social Links */}
             <div className="pt-4 border-t border-[#F3EFEA] flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-[#78716C]">
-                Follow Us
+                {t("footer.followUs")}
               </span>
               <div className="flex items-center gap-2">
                 <a

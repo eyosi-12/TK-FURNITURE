@@ -5,57 +5,61 @@ import useProducts from "../Hooks/useProducts";
 import ProductCard from "../components/ProductCard";
 import InquiryModal from "../components/InquiryModal";
 import Loader from "../components/Loader";
-import { ArrowLeft, MapPin, Calendar, Send, Sparkles } from "lucide-react";
+import { ArrowLeft, MapPin, Send } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const { projects, loading: projectsLoading } = useProjects();
   const { products, loading: productsLoading } = useProducts();
+  const { t, localizeProject } = useLanguage();
 
   const [activePhoto, setActivePhoto] = useState("");
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
-  const project = Array.isArray(projects)
+  const rawProject = Array.isArray(projects)
     ? projects.find((p) => String(p.id) === String(id))
     : null;
+
+  const project = rawProject ? (localizeProject(rawProject) || rawProject) : null;
 
   useEffect(() => {
     if (project) {
       setActivePhoto(project.heroImage);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [project, id]);
+  }, [id, rawProject]);
 
   if (productsLoading || projectsLoading) return <Loader />;
 
   if (!project) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-4">
-        <h2 className="text-2xl font-bold text-[#1C1917]">Project Not Found</h2>
-        <p className="text-sm text-[#78716C]">The requested project installation could not be found.</p>
+        <h2 className="text-2xl font-bold text-[#1C1917]">{t("projects.projectNotFound")}</h2>
+        <p className="text-sm text-[#78716C]">{t("projects.projectNotFoundDesc")}</p>
         <Link
           to="/projects"
           className="inline-flex items-center gap-2 px-6 py-3 bg-[#8A5333] text-white text-xs font-semibold uppercase tracking-wider rounded-xl"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Projects</span>
+          <span>{t("projects.backToProjects")}</span>
         </Link>
       </div>
     );
   }
 
   // Linked furniture pieces used in this project
-  const furnitureUsedProducts = Array.isArray(products) && Array.isArray(project.furnitureUsed)
-    ? products.filter((p) => project.furnitureUsed.includes(p.id))
+  const furnitureUsedProducts = Array.isArray(products) && Array.isArray(rawProject.furnitureUsed)
+    ? products.filter((p) => rawProject.furnitureUsed.includes(p.id))
     : [];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-14">
       {/* Breadcrumbs */}
       <nav className="text-xs text-[#78716C] flex items-center gap-2">
-        <Link to="/" className="hover:text-[#1C1917]">Home</Link>
+        <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
         <span>/</span>
-        <Link to="/projects" className="hover:text-[#1C1917]">Projects</Link>
+        <Link to="/projects" className="hover:text-[#1C1917]">{t("nav.projects")}</Link>
         <span>/</span>
         <span className="text-[#1C1917] font-semibold">{project.title}</span>
       </nav>
@@ -82,7 +86,7 @@ const ProjectDetail = () => {
           className="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#8A5333] hover:bg-[#6E3F24] text-white text-xs font-semibold uppercase tracking-wider rounded-xl transition-all shadow-md"
         >
           <Send className="w-4 h-4" />
-          <span>Inquire About Similar Work</span>
+          <span>{t("projects.inquireSimilar")}</span>
         </button>
       </div>
 
@@ -123,13 +127,15 @@ const ProjectDetail = () => {
       {/* Project Narrative & Details */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 pt-4">
         <div className="lg:col-span-8 space-y-6">
-          <h2 className="text-2xl font-bold text-[#1C1917]">The Design Story</h2>
+          <h2 className="text-2xl font-bold text-[#1C1917]">{t("projects.overview")}</h2>
           <p className="text-[#57534E] text-base leading-relaxed">
             {project.description}
           </p>
           {project.clientBrief && (
             <div className="bg-[#FAF8F5] border-l-4 border-[#8A5333] p-5 rounded-r-xl space-y-1">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333]">Client Brief</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333]">
+                {t("projects.clientBrief")}
+              </span>
               <p className="text-sm italic text-[#44403C]">"{project.clientBrief}"</p>
             </div>
           )}
@@ -137,52 +143,52 @@ const ProjectDetail = () => {
 
         <div className="lg:col-span-4 bg-white border border-[#E7E2D9] rounded-2xl p-6 space-y-4 shadow-xs self-start">
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#78716C]">
-            Project Specs
+            {t("projects.overview")}
           </h3>
           <div className="space-y-3 text-xs text-[#44403C]">
             <div className="flex justify-between py-1.5 border-b border-[#F3EFEA]">
-              <span className="text-[#78716C]">Location</span>
+              <span className="text-[#78716C]">{t("contact.breadcrumb")}</span>
               <span className="font-semibold text-[#1C1917]">{project.location}</span>
             </div>
             <div className="flex justify-between py-1.5 border-b border-[#F3EFEA]">
-              <span className="text-[#78716C]">Category</span>
+              <span className="text-[#78716C]">{t("catalog.roomCategory")}</span>
               <span className="font-semibold text-[#1C1917]">{project.roomType}</span>
             </div>
             <div className="flex justify-between py-1.5 border-b border-[#F3EFEA]">
-              <span className="text-[#78716C]">Completion</span>
+              <span className="text-[#78716C]">{t("projects.completed")}</span>
               <span className="font-semibold text-[#1C1917]">{project.year}</span>
             </div>
             <div className="flex justify-between py-1.5 border-b border-[#F3EFEA]">
-              <span className="text-[#78716C]">Custom Pieces</span>
-              <span className="font-semibold text-[#1C1917]">{furnitureUsedProducts.length} installed</span>
+              <span className="text-[#78716C]">{t("projects.furnitureUsed")}</span>
+              <span className="font-semibold text-[#1C1917]">{furnitureUsedProducts.length}</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* "Shop This Project" (Furniture Used) - Wireframe Page 3 & Flow 3 */}
+      {/* "Shop This Project" (Furniture Used) */}
       {furnitureUsedProducts.length > 0 && (
         <section className="pt-12 border-t border-[#E7E2D9] space-y-8">
           <div className="flex items-baseline justify-between">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-                Catalog Integration
+                {t("projects.portfolioBadge")}
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1917]">
-                Shop This Project (Furniture Used)
+                {t("projects.furnitureUsed")}
               </h2>
             </div>
             <Link
               to="/catalog"
               className="text-xs font-semibold uppercase tracking-wider text-[#8A5333] hover:text-[#6E3F24]"
             >
-              Browse Entire Catalog
+              {t("home.viewFullCatalog")}
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {furnitureUsedProducts.map((prod) => (
-              <ProductCard key={prod.id} item={prod} buttonText="View Piece" />
+              <ProductCard key={prod.id} item={prod} buttonText={t("catalog.view")} />
             ))}
           </div>
         </section>
@@ -194,7 +200,7 @@ const ProjectDetail = () => {
         onClose={() => setIsInquiryModalOpen(false)}
         itemName={project.title}
         itemCategory={project.roomType}
-        itemPrice="Custom Interior Commission"
+        itemPrice="Custom Commission"
       />
     </div>
   );

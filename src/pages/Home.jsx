@@ -5,11 +5,13 @@ import useProjects from "../Hooks/useProjects";
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import HeroCarousel from "../components/HeroCarousel";
-import { ArrowRight, ArrowUpRight, Hammer, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
 const Home = () => {
   const { products, loading: productsLoading } = useProducts();
   const { projects, loading: projectsLoading } = useProjects();
+  const { t, localizeProject, localizeCategory } = useLanguage();
   const navigate = useNavigate();
 
   // Featured 3 products as specified in Wireframe Figure 5
@@ -29,28 +31,33 @@ const Home = () => {
   const roomCategories = [
     {
       name: "Living Room",
+      label: t("rooms.livingRoom"),
       image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80",
-      description: "Sofas, armchairs, travertine & oak tables",
+      description: t("rooms.livingRoomDesc"),
     },
     {
       name: "Bedroom",
+      label: t("rooms.bedroom"),
       image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80",
-      description: "Platform beds, fluted wardrobes, bedside consoles",
+      description: t("rooms.bedroomDesc"),
     },
     {
       name: "Kitchen",
+      label: t("rooms.kitchen"),
       image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=600&q=80",
-      description: "Solid teak dining tables & leather barstools",
+      description: t("rooms.kitchenDesc"),
     },
     {
       name: "Office",
+      label: t("rooms.office"),
       image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80",
-      description: "Executive desks, task chairs & modular shelving",
+      description: t("rooms.officeDesc"),
     },
     {
       name: "Apartment",
+      label: t("rooms.apartment"),
       image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
-      description: "Balcony teak sets & compact tailored pieces",
+      description: t("rooms.apartmentDesc"),
     },
   ];
 
@@ -66,27 +73,27 @@ const Home = () => {
           <div className="lg:col-span-7 space-y-6 z-10">
             <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5] text-xs font-semibold uppercase tracking-widest text-[#8A5333] border border-[#E5DFD5]">
               <Sparkles className="w-3.5 h-3.5" />
-              Crafted in Addis Ababa · Ethiopia
+              {t("home.heroBadge")}
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C1917] tracking-tight leading-[1.15]">
-              Furniture that fits your story.
+              {t("home.heroTitle")}
             </h1>
             <p className="text-base sm:text-lg text-[#57534E] leading-relaxed max-w-xl">
-              Thoughtfully proportioned, handcrafted timber pieces and bespoke upholstery designed for Ethiopian homes, creative studios, and modern living spaces.
+              {t("home.heroSubtitle")}
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
                 to="/catalog"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#8A5333] hover:bg-[#6E3F24] text-white font-medium text-sm tracking-wider uppercase rounded-xl transition-all shadow-md hover:shadow-lg"
               >
-                <span>Shop the Catalog</span>
+                <span>{t("home.shopCatalog")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/about"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/80 hover:bg-white text-[#1C1917] font-medium text-sm rounded-xl border border-[#DCD6CC] transition-all"
               >
-                <span>Our Workshop Story</span>
+                <span>{t("home.workshopStory")}</span>
               </Link>
             </div>
           </div>
@@ -102,17 +109,17 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-              Curated Collections
+              {t("home.curatedCollections")}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1917] mt-1">
-              Shop by Room
+              {t("home.shopByRoom")}
             </h2>
           </div>
           <Link
             to="/catalog"
             className="text-xs font-semibold uppercase tracking-wider text-[#8A5333] hover:text-[#6E3F24] inline-flex items-center gap-1"
           >
-            <span>Explore All Categories</span>
+            <span>{t("home.exploreAllCategories")}</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
@@ -128,15 +135,15 @@ const Home = () => {
               <div className="relative aspect-square rounded-xl overflow-hidden bg-[#F3EFEA] mb-3">
                 <img
                   src={room.image}
-                  alt={room.name}
+                  alt={room.label}
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
                 />
               </div>
               <h3 className="font-bold text-sm sm:text-base text-[#1C1917] group-hover:text-[#8A5333] transition-colors">
-                {room.name}
+                {room.label}
               </h3>
               <p className="text-[11px] text-[#78716C] line-clamp-1 mt-0.5">
-                Browse collection
+                {t("home.browseCollection")}
               </p>
             </button>
           ))}
@@ -148,17 +155,17 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-              Signature Pieces
+              {t("home.signaturePieces")}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1917] mt-1">
-              Featured Products
+              {t("home.featuredProducts")}
             </h2>
           </div>
           <Link
             to="/catalog"
             className="text-xs font-semibold uppercase tracking-wider text-[#8A5333] hover:text-[#6E3F24] inline-flex items-center gap-1"
           >
-            <span>View Full Catalog</span>
+            <span>{t("home.viewFullCatalog")}</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
@@ -166,7 +173,7 @@ const Home = () => {
         {/* 3 Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {featuredProducts.map((product) => (
-            <ProductCard key={product.id} item={product} buttonText="View Details" />
+            <ProductCard key={product.id} item={product} buttonText={t("home.viewDetails")} />
           ))}
         </div>
       </section>
@@ -176,65 +183,69 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-              Real Installations
+              {t("home.realInstallations")}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1917] mt-1">
-              Featured Projects
+              {t("home.featuredProjects")}
             </h2>
           </div>
           <Link
             to="/projects"
             className="text-xs font-semibold uppercase tracking-wider text-[#8A5333] hover:text-[#6E3F24] inline-flex items-center gap-1"
           >
-            <span>View All Projects</span>
+            <span>{t("home.viewAllProjects")}</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
 
         {/* 2 Wide Cards side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {featuredProjects.map((project) => (
-            <Link
-              key={project.id}
-              to={`/projects/${project.id}`}
-              className="group bg-white rounded-2xl overflow-hidden border border-[#E7E2D9] hover:border-[#8A5333]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden bg-[#F3EFEA]">
-                <img
-                  src={project.heroImage}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-[#FAF8F5]/95 backdrop-blur-xs text-xs font-semibold text-[#1C1917] px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
-                    {project.roomType}
-                  </span>
-                </div>
-              </div>
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-[#1C1917] group-hover:text-[#8A5333] transition-colors">
-                    {project.title} — {project.roomType}
-                  </h3>
-                  <p className="text-xs text-[#78716C] mt-1">
-                    {project.location} · Completed {project.year}
-                  </p>
-                  <p className="text-sm text-[#57534E] mt-3 line-clamp-2">
-                    {project.description}
-                  </p>
-                </div>
+          {featuredProjects.map((project) => {
+            const localizedProject = localizeProject(project) || project;
 
-                <div className="pt-4 mt-4 border-t border-[#F3EFEA] flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#8A5333]">
-                    Explore Project & Furniture Used
-                  </span>
-                  <div className="w-8 h-8 rounded-full bg-[#F5F1EB] group-hover:bg-[#8A5333] group-hover:text-white flex items-center justify-center transition-colors">
-                    <ArrowRight className="w-4 h-4" />
+            return (
+              <Link
+                key={project.id}
+                to={`/projects/${project.id}`}
+                className="group bg-white rounded-2xl overflow-hidden border border-[#E7E2D9] hover:border-[#8A5333]/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-[#F3EFEA]">
+                  <img
+                    src={localizedProject.heroImage}
+                    alt={localizedProject.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-[#FAF8F5]/95 backdrop-blur-xs text-xs font-semibold text-[#1C1917] px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
+                      {localizedProject.roomType}
+                    </span>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1C1917] group-hover:text-[#8A5333] transition-colors">
+                      {localizedProject.title} — {localizedProject.roomType}
+                    </h3>
+                    <p className="text-xs text-[#78716C] mt-1">
+                      {localizedProject.location} · {t("projects.completed")} {localizedProject.year}
+                    </p>
+                    <p className="text-sm text-[#57534E] mt-3 line-clamp-2">
+                      {localizedProject.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 mt-4 border-t border-[#F3EFEA] flex items-center justify-between">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#8A5333]">
+                      {t("home.exploreProject")}
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-[#F5F1EB] group-hover:bg-[#8A5333] group-hover:text-white flex items-center justify-center transition-colors">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -256,20 +267,20 @@ const Home = () => {
           {/* Text on Right */}
           <div className="md:col-span-7 space-y-4">
             <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-              Artisanal Heritage
+              {t("home.artisanalHeritage")}
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1917]">
-              About Our Workshop
+              {t("home.aboutWorkshop")}
             </h2>
             <p className="text-[#57534E] text-base leading-relaxed">
-              We are an Addis Ababa–based furniture studio uniting time-honored joinery with contemporary minimalism. From solid kiln-dried highland timber to custom tailored upholstery, each piece is built to order, ensuring enduring quality that gracefully endures everyday life.
+              {t("home.workshopDesc")}
             </p>
             <div className="pt-2">
               <Link
                 to="/about"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-[#1C1917] hover:bg-[#8A5333] text-white text-xs font-semibold uppercase tracking-wider rounded-xl transition-all shadow-xs"
               >
-                <span>Learn More</span>
+                <span>{t("home.learnMore")}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>

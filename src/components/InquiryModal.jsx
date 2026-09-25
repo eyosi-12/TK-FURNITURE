@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { X, CheckCircle, Send } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
 const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemPrice = "" }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -36,10 +38,10 @@ const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemP
         <div className="p-6 bg-white border-b border-[#E7E2D9] flex items-center justify-between">
           <div>
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#8A5333]">
-              Direct In-Studio Inquiry
+              {t("modal.badge")}
             </span>
             <h3 className="text-xl font-bold text-[#1C1917] mt-0.5">
-              {itemName ? `Inquire: ${itemName}` : "Inquire About Furniture"}
+              {itemName ? t("modal.titleProduct", { name: itemName }) : t("modal.titleGeneral")}
             </h3>
           </div>
           <button
@@ -58,39 +60,39 @@ const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemP
                 <CheckCircle className="w-10 h-10" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-xl font-bold text-[#1C1917]">Inquiry Received</h4>
+                <h4 className="text-xl font-bold text-[#1C1917]">{t("modal.successTitle")}</h4>
                 <p className="text-sm text-[#57534E] max-w-xs mx-auto">
-                  Thank you! Our studio team on Bole Road will contact you via phone or email within 24 hours.
+                  {t("modal.successDesc")}
                 </p>
               </div>
               <div className="bg-[#F3EFEA] p-4 rounded-xl text-left text-xs space-y-1 text-[#44403C] max-w-xs mx-auto">
-                <p><span className="font-semibold">Piece:</span> {itemName}</p>
-                <p><span className="font-semibold">Contact:</span> {formData.phone || formData.email}</p>
+                <p><span className="font-semibold">{t("catalog.itemType")}:</span> {itemName}</p>
+                <p><span className="font-semibold">{t("contact.phone")}:</span> {formData.phone || formData.email}</p>
               </div>
               <button
                 onClick={handleReset}
                 className="mt-4 px-6 py-2.5 bg-[#1C1917] text-white text-xs font-semibold uppercase tracking-wider rounded-lg hover:bg-[#8A5333] transition-colors"
               >
-                Close Window
+                {t("modal.done")}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               {itemPrice && (
                 <div className="bg-[#F3EFEA] p-3 rounded-lg flex items-center justify-between text-xs">
-                  <span className="text-[#57534E]">Estimated Reference:</span>
+                  <span className="text-[#57534E]">{t("catalog.startingFrom")}:</span>
                   <span className="font-bold text-[#1C1917]">{itemPrice}</span>
                 </div>
               )}
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#44403C] mb-1">
-                  Full Name *
+                  {t("modal.name")} *
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Almaz Tadesse"
+                  placeholder={t("contact.fullNamePlaceholder")}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-3.5 py-2.5 bg-white border border-[#D6D3D1] rounded-lg text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] transition-colors"
@@ -100,12 +102,12 @@ const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemP
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-[#44403C] mb-1">
-                    Phone Number *
+                    {t("modal.phone")} *
                   </label>
                   <input
                     type="tel"
                     required
-                    placeholder="+251 9XX XXX XXX"
+                    placeholder={t("contact.phonePlaceholder")}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full px-3.5 py-2.5 bg-white border border-[#D6D3D1] rounded-lg text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] transition-colors"
@@ -113,11 +115,11 @@ const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemP
                 </div>
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-[#44403C] mb-1">
-                    Email Address
+                    {t("modal.email")}
                   </label>
                   <input
                     type="email"
-                    placeholder="name@example.com"
+                    placeholder={t("contact.emailPlaceholder")}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-3.5 py-2.5 bg-white border border-[#D6D3D1] rounded-lg text-sm text-[#1C1917] focus:outline-none focus:border-[#8A5333] transition-colors"
@@ -127,7 +129,7 @@ const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemP
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#44403C] mb-1">
-                  Inquiry Message / Custom Dimensions
+                  {t("modal.message")}
                 </label>
                 <textarea
                   rows={3}
@@ -143,7 +145,7 @@ const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemP
                   onClick={onClose}
                   className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#78716C] hover:text-[#1C1917] transition-colors"
                 >
-                  Cancel
+                  {t("modal.done")}
                 </button>
                 <button
                   type="submit"
@@ -151,7 +153,7 @@ const InquiryModal = ({ isOpen, onClose, itemName = "", itemCategory = "", itemP
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#8A5333] hover:bg-[#6E3F24] text-white text-xs font-semibold uppercase tracking-wider rounded-lg transition-colors shadow-xs"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>{isSubmitting ? "Sending..." : "Submit Inquiry"}</span>
+                  <span>{isSubmitting ? t("modal.submitting") : t("modal.submit")}</span>
                 </button>
               </div>
             </form>

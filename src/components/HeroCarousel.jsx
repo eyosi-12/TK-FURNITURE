@@ -1,38 +1,40 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
 const HERO_SLIDES = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80",
-    badge: "Studio Showroom",
-    title: "Bole Road Flagship",
-    subtitle: "Addis Ababa · Curated Living Spaces",
+    badgeKey: "carousel.slide1.badge",
+    titleKey: "carousel.slide1.title",
+    subtitleKey: "carousel.slide1.subtitle",
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80",
-    badge: "Highland Timber",
-    title: "Artisanal Woodcraft",
-    subtitle: "Kiln-dried solid hardwood & bespoke joinery",
+    badgeKey: "carousel.slide2.badge",
+    titleKey: "carousel.slide2.title",
+    subtitleKey: "carousel.slide2.subtitle",
   },
   {
     id: 3,
     image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
-    badge: "Tailored Living",
-    title: "Ergonomic Comfort",
-    subtitle: "Custom-built sofas & textured upholstery",
+    badgeKey: "carousel.slide3.badge",
+    titleKey: "carousel.slide3.title",
+    subtitleKey: "carousel.slide3.subtitle",
   },
   {
     id: 4,
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-    badge: "Architectural Spaces",
-    title: "Villa & Studio Living",
-    subtitle: "Made to measure for contemporary homes",
+    badgeKey: "carousel.slide4.badge",
+    titleKey: "carousel.slide4.title",
+    subtitleKey: "carousel.slide4.subtitle",
   },
 ];
 
 const HeroCarousel = () => {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef(0);
@@ -97,37 +99,43 @@ const HeroCarousel = () => {
         className="flex w-full h-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {HERO_SLIDES.map((slide, index) => (
-          <div
-            key={slide.id}
-            className="w-full h-full shrink-0 relative"
-            aria-hidden={index !== currentIndex}
-          >
-            <img
-              src={slide.image}
-              alt={slide.title}
-              className="w-full h-full object-cover"
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-            {/* Cinematic Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+        {HERO_SLIDES.map((slide, index) => {
+          const badge = t(slide.badgeKey);
+          const title = t(slide.titleKey);
+          const subtitle = t(slide.subtitleKey);
 
-            {/* Slide Content Overlay */}
-            <div className="absolute bottom-6 left-6 right-6 text-white transition-all duration-500 transform translate-y-0">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-semibold uppercase tracking-widest text-[#FAF8F5] mb-2 border border-white/20 shadow-xs">
-                <Sparkles className="w-3 h-3 text-[#E5DFD5]" />
-                {slide.badge}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white drop-shadow-sm">
-                {slide.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-[#FAF8F5]/90 mt-1 font-medium drop-shadow-xs">
-                {slide.subtitle}
-              </p>
+          return (
+            <div
+              key={slide.id}
+              className="w-full h-full shrink-0 relative"
+              aria-hidden={index !== currentIndex}
+            >
+              <img
+                src={slide.image}
+                alt={title}
+                className="w-full h-full object-cover"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+              {/* Cinematic Gradient Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+
+              {/* Slide Content Overlay */}
+              <div className="absolute bottom-6 left-6 right-6 text-white transition-all duration-500 transform translate-y-0">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-semibold uppercase tracking-widest text-[#FAF8F5] mb-2 border border-white/20 shadow-xs">
+                  <Sparkles className="w-3 h-3 text-[#E5DFD5]" />
+                  {badge}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white drop-shadow-sm">
+                  {title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#FAF8F5]/90 mt-1 font-medium drop-shadow-xs">
+                  {subtitle}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Prev / Next Navigation Arrows */}

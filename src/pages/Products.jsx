@@ -279,19 +279,6 @@ const Products = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-      {/* Breadcrumb Navigation */}
-      <nav className="text-xs text-[#78716C] mb-6 flex items-center gap-2">
-        <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
-        <span>/</span>
-        <Link to="/catalog" className="hover:text-[#1C1917]">{t("catalog.breadcrumb")}</Link>
-        {selectedRoom !== "All" && (
-          <>
-            <span>/</span>
-            <span className="text-[#1C1917] font-semibold">{localizeCategory(selectedRoom)}</span>
-          </>
-        )}
-      </nav>
-
       {/* Category Title Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 mb-8 border-b border-[#E7E2D9]">
         <div>

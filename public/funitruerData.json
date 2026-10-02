@@ -290,5 +290,51 @@
       "https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1000&q=80"
     ],
     "description": "Designed for terrace and apartment balcony living. Kiln-dried grade-A teak stands up to seasonal rains and strong highland sunlight with zero maintenance."
+  },
+  {
+    "id": 13,
+    "name": "Bole Architectural Sideboard & Credenza",
+    "category": "Dining Room",
+    "subCategory": "Credenzas",
+    "price": 42000,
+    "material": "Fluted Highland Oak & Brushed Brass",
+    "materialGroup": "Wood",
+    "dimensions": "180 x 48 x 78 cm",
+    "leadTime": "2-3 weeks",
+    "stock": 4,
+    "featured": true,
+    "colors": [
+      { "name": "Smoked Oak", "hex": "#4A3B32" },
+      { "name": "Raw Natural Oak", "hex": "#C9B194" }
+    ],
+    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "Hand-carved vertical fluting across four soft-close push doors. Features integrated cutlery drawers lined with felt and adjustable interior shelving."
+  },
+  {
+    "id": 14,
+    "name": "Kaffa Sculptural Teak Dining Armchair",
+    "category": "Dining Room",
+    "subCategory": "Dining Chairs",
+    "price": 16500,
+    "material": "Solid Teak & Hand-Woven Paper Cord",
+    "materialGroup": "Wood",
+    "dimensions": "56 x 54 x 76 cm (Seat: 46cm)",
+    "leadTime": "In Stock",
+    "stock": 18,
+    "featured": true,
+    "colors": [
+      { "name": "Natural Teak & Cord", "hex": "#BFA588" },
+      { "name": "Stained Black Teak", "hex": "#22201E" }
+    ],
+    "image": "https://images.unsplash.com/photo-1580481077195-c3a821a506cb?auto=format&fit=crop&w=1000&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1580481077195-c3a821a506cb?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=80"
+    ],
+    "description": "An organic curved backrest carved from continuous solid teak with traditional Danish hand-woven cord seating for lasting everyday comfort."
   }
 ]

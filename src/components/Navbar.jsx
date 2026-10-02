@@ -46,8 +46,8 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
+        {/* Desktop Nav Links with Smooth Flow Container */}
+        <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 bg-[#F1ECE4]/70 p-1.5 rounded-full border border-[#E4DDD2]/80 backdrop-blur-xs shadow-2xs">
           {navItems.map((item) => {
             const isActive =
               item.path === "/"
@@ -58,10 +58,10 @@ const Navbar = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`relative px-4 py-2 rounded-full text-xs lg:text-sm font-semibold tracking-wide transition-all duration-300 ease-out cursor-pointer select-none active:scale-95 ${
                   isActive
-                    ? "bg-[#1C1917] text-[#FAF8F5] shadow-sm"
-                    : "text-[#57534E] hover:text-[#1C1917] hover:bg-[#EFEAE2]"
+                    ? "bg-[#1C1917] text-[#FAF8F5] shadow-sm shadow-black/10 font-bold"
+                    : "text-[#57534E] hover:text-[#1C1917] hover:bg-white/80"
                 }`}
               >
                 {item.label}

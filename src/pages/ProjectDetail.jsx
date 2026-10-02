@@ -55,15 +55,6 @@ const ProjectDetail = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-14">
-      {/* Breadcrumbs */}
-      <nav className="text-xs text-[#78716C] flex items-center gap-2">
-        <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
-        <span>/</span>
-        <Link to="/projects" className="hover:text-[#1C1917]">{t("nav.projects")}</Link>
-        <span>/</span>
-        <span className="text-[#1C1917] font-semibold">{project.title}</span>
-      </nav>
-
       {/* Project Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#E7E2D9] pb-8">
         <div className="space-y-2 max-w-3xl">

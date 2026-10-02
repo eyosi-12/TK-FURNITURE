@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router";
 import useProducts from "../Hooks/useProducts";
 import useProjects from "../Hooks/useProjects";
+import CategoryCarousel from "../components/CategoryCarousel";
+import FeaturedProductsCarousel from "../components/FeaturedProductsCarousel";
 import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import HeroCarousel from "../components/HeroCarousel";
@@ -14,11 +16,9 @@ const Home = () => {
   const { t, localizeProject, localizeCategory } = useLanguage();
   const navigate = useNavigate();
 
-  // Featured 3 products as specified in Wireframe Figure 5
-  const featuredProducts = Array.isArray(products)
-    ? products.filter((p) => p.featured).slice(0, 3).length === 3
-      ? products.filter((p) => p.featured).slice(0, 3)
-      : products.slice(0, 3)
+  // Curated products for carousel (show all products for a rich transition)
+  const displayProducts = Array.isArray(products) && products.length > 0
+    ? products
     : [];
 
   // Featured 2 projects as specified in Wireframe Figure 5
@@ -28,6 +28,7 @@ const Home = () => {
       : projects.slice(0, 2)
     : [];
 
+  // 10 Curated Room Categories for rich mouse-sliding carousel
   const roomCategories = [
     {
       name: "Living Room",
@@ -40,6 +41,12 @@ const Home = () => {
       label: t("rooms.bedroom"),
       image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80",
       description: t("rooms.bedroomDesc"),
+    },
+    {
+      name: "Dining Room",
+      label: t("rooms.diningRoom"),
+      image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=600&q=80",
+      description: t("rooms.diningRoomDesc"),
     },
     {
       name: "Kitchen",
@@ -59,6 +66,30 @@ const Home = () => {
       image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
       description: t("rooms.apartmentDesc"),
     },
+    {
+      name: "Lounge",
+      label: t("rooms.lounge"),
+      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
+      description: t("rooms.loungeDesc"),
+    },
+    {
+      name: "Outdoor",
+      label: t("rooms.outdoor"),
+      image: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=600&q=80",
+      description: t("rooms.outdoorDesc"),
+    },
+    {
+      name: "Kids & Study",
+      label: t("rooms.kidsStudy"),
+      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80",
+      description: t("rooms.kidsStudyDesc"),
+    },
+    {
+      name: "Atelier",
+      label: t("rooms.atelier"),
+      image: "https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=600&q=80",
+      description: t("rooms.atelierDesc"),
+    },
   ];
 
   if (productsLoading || projectsLoading) {
@@ -67,115 +98,71 @@ const Home = () => {
 
   return (
     <div className="space-y-16 sm:space-y-24">
-      {/* 1. Hero Section - Wireframe Figure 5 */}
-      <section className="relative overflow-hidden bg-[#EFECE6] border-b border-[#E7E2D9]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6 z-10">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5] text-xs font-semibold uppercase tracking-widest text-[#8A5333] border border-[#E5DFD5]">
-              <Sparkles className="w-3.5 h-3.5" />
+      {/* 1. Hero Section - Stunning, High-Visibility Architectural Furniture House */}
+      <section className="relative overflow-hidden border-b border-[#E7E2D9] bg-[#FAF8F5]">
+        {/* Full-Bleed Grand Furniture House Background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2600&q=90"
+            alt="TK Luxury Furniture House & Atelier Showroom"
+            className="w-full h-full object-cover object-right lg:object-center"
+          />
+          {/* Seamless feathered luxury studio vignette: gives crisp text readability on the left while showcasing the grand furniture house on the right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/85 via-50% to-[#FAF8F5]/20 lg:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F5] via-transparent to-transparent lg:hidden" />
+          {/* Subtle warm ambient lighting accents */}
+          <div className="absolute top-10 left-10 w-96 h-96 bg-[#8A5333]/8 rounded-full blur-3xl pointer-events-none" />
+        </div>
+
+        {/* Content Container - Neat, open, architectural elegance (no clunky box!) */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-14 sm:pb-20 lg:pt-10 lg:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Neat, Crisp, Uncluttered Typography & CTAs */}
+          <div className="lg:col-span-7 space-y-6">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-xs font-bold uppercase tracking-widest text-[#8A5333] border border-[#E7E2D9] shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#8A5333]" />
               {t("home.heroBadge")}
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1C1917] tracking-tight leading-[1.15]">
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1C1917] tracking-tight leading-[1.12]">
               {t("home.heroTitle")}
             </h1>
-            <p className="text-base sm:text-lg text-[#57534E] leading-relaxed max-w-xl">
+
+            <p className="text-base sm:text-lg text-[#57534E] leading-relaxed max-w-xl font-normal">
               {t("home.heroSubtitle")}
             </p>
+
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
                 to="/catalog"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#8A5333] hover:bg-[#6E3F24] text-white font-medium text-sm tracking-wider uppercase rounded-xl transition-all shadow-md hover:shadow-lg"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#8A5333] hover:bg-[#6E3F24] text-white font-semibold text-sm tracking-wider uppercase rounded-xl transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5"
               >
                 <span>{t("home.shopCatalog")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/80 hover:bg-white text-[#1C1917] font-medium text-sm rounded-xl border border-[#DCD6CC] transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/95 hover:bg-white text-[#1C1917] font-semibold text-sm rounded-xl border border-[#DCD6CC] transition-all shadow-2xs hover:border-[#8A5333]/50"
               >
                 <span>{t("home.workshopStory")}</span>
               </Link>
             </div>
           </div>
 
+          {/* Right Column: Hero Showcase Carousel */}
           <div className="lg:col-span-5 relative">
             <HeroCarousel />
           </div>
         </div>
       </section>
 
-      {/* 2. Shop by Room - Wireframe Figure 5 */}
+      {/* 2. Shop by Room - Mouse-Draggable Smooth Carousel */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-              {t("home.curatedCollections")}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1917] mt-1">
-              {t("home.shopByRoom")}
-            </h2>
-          </div>
-          <Link
-            to="/catalog"
-            className="text-xs font-semibold uppercase tracking-wider text-[#8A5333] hover:text-[#6E3F24] inline-flex items-center gap-1"
-          >
-            <span>{t("home.exploreAllCategories")}</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* 5 Room Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-          {roomCategories.map((room) => (
-            <button
-              key={room.name}
-              onClick={() => navigate(`/catalog?category=${encodeURIComponent(room.name)}`)}
-              className="group text-left bg-white rounded-2xl overflow-hidden border border-[#E7E2D9] hover:border-[#8A5333] transition-all duration-300 p-2 sm:p-3 hover:shadow-lg focus:outline-none"
-            >
-              <div className="relative aspect-square rounded-xl overflow-hidden bg-[#F3EFEA] mb-3">
-                <img
-                  src={room.image}
-                  alt={room.label}
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
-                />
-              </div>
-              <h3 className="font-bold text-sm sm:text-base text-[#1C1917] group-hover:text-[#8A5333] transition-colors">
-                {room.label}
-              </h3>
-              <p className="text-[11px] text-[#78716C] line-clamp-1 mt-0.5">
-                {t("home.browseCollection")}
-              </p>
-            </button>
-          ))}
-        </div>
+        <CategoryCarousel categories={roomCategories} />
       </section>
 
-      {/* 3. Featured Products - Wireframe Figure 5 (3 cards) */}
+      {/* 3. Featured Products - Mouse-Draggable Smooth Carousel */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
-              {t("home.signaturePieces")}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#1C1917] mt-1">
-              {t("home.featuredProducts")}
-            </h2>
-          </div>
-          <Link
-            to="/catalog"
-            className="text-xs font-semibold uppercase tracking-wider text-[#8A5333] hover:text-[#6E3F24] inline-flex items-center gap-1"
-          >
-            <span>{t("home.viewFullCatalog")}</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* 3 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} item={product} buttonText={t("home.viewDetails")} />
-          ))}
-        </div>
+        <FeaturedProductsCarousel products={displayProducts} />
       </section>
 
       {/* 4. Featured Projects - Wireframe Figure 5 (2 wide cards) */}

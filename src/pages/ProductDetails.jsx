@@ -87,22 +87,6 @@ const ProductDetails = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-16">
-      {/* Breadcrumb Navigation - Wireframe Figure 7 */}
-      <nav className="text-xs text-[#78716C] flex items-center gap-2 flex-wrap">
-        <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
-        <span>/</span>
-        <Link to="/catalog" className="hover:text-[#1C1917]">{t("catalog.breadcrumb")}</Link>
-        <span>/</span>
-        <Link 
-          to={`/catalog?category=${encodeURIComponent(rawProduct.category)}`} 
-          className="hover:text-[#1C1917]"
-        >
-          {product.category}
-        </Link>
-        <span>/</span>
-        <span className="text-[#1C1917] font-semibold">{product.name}</span>
-      </nav>
-
       {/* Main Two-Column Layout - Wireframe Figure 7 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
         {/* Left Column: Large Product Imagery + Thumbnail Strip */}

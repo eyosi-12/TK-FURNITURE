@@ -38,14 +38,6 @@ const About = () => {
 
   return (
     <div className="space-y-16 sm:space-y-24 py-10 sm:py-16">
-      {/* Breadcrumb Navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="text-xs text-[#78716C] flex items-center gap-2">
-          <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
-          <span>/</span>
-          <span className="text-[#1C1917] font-semibold">{t("about.breadcrumb")}</span>
-        </nav>
-      </div>
 
       {/* Hero / Brand Story Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

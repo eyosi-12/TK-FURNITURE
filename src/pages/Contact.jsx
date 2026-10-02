@@ -62,13 +62,6 @@ const Contact = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12">
-      {/* Breadcrumb Navigation - Wireframe Figure 9 */}
-      <nav className="text-xs text-[#78716C] flex items-center gap-2">
-        <Link to="/" className="hover:text-[#1C1917]">{t("nav.home")}</Link>
-        <span>/</span>
-        <span className="text-[#1C1917] font-semibold">{t("contact.breadcrumb")}</span>
-      </nav>
-
       {/* Title & Subtitle - Wireframe Figure 9 */}
       <div className="space-y-2 border-b border-[#E7E2D9] pb-8">
         <h1 className="text-3xl sm:text-5xl font-bold text-[#1C1917]">

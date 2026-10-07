@@ -58,7 +58,7 @@ const Navbar = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={`relative px-4 py-2 rounded-full text-xs lg:text-sm font-semibold tracking-wide transition-all duration-300 ease-out cursor-pointer select-none active:scale-95 ${
+                className={`relative px-2.5 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-semibold tracking-wide transition-all duration-300 ease-out cursor-pointer select-none active:scale-95 ${
                   isActive
                     ? "bg-[#1C1917] text-[#FAF8F5] shadow-sm shadow-black/10 font-bold"
                     : "text-[#57534E] hover:text-[#1C1917] hover:bg-white/80"

@@ -27,13 +27,14 @@ const FeaturedProductsCarousel = ({ products }) => {
     }
   };
 
-  // Ambient smooth auto-glide that pauses on mouse hover / drag
+  // Ambient smooth auto-glide that pauses on mouse hover / drag / touch
   useEffect(() => {
     let animationId;
     let lastTime = performance.now();
+    let scrollDirection = 1; // 1 = forward, -1 = reverse
 
     const smoothAutoScroll = (time) => {
-      const delta = time - lastTime;
+      const delta = Math.min(time - lastTime, 50); // cap delta to prevent tab-switch jumps
       lastTime = time;
 
       if (scrollRef.current && !isHovered.current && !isDown.current) {
@@ -41,11 +42,18 @@ const FeaturedProductsCarousel = ({ products }) => {
         const maxScroll = scrollWidth - clientWidth;
 
         if (maxScroll > 0) {
-          // Slow, elegant continuous glide
-          let nextScroll = sLeft + (0.045 * delta);
+          // Matched dynamic speed: 0.11 px/ms (~110 px/s)
+          const speed = 0.11;
+          let nextScroll = sLeft + (scrollDirection * speed * delta);
+
           if (nextScroll >= maxScroll - 1) {
-            nextScroll = 0; // seamlessly loop back
+            scrollDirection = -1; // smoothly reverse when reaching the end
+            nextScroll = maxScroll;
+          } else if (nextScroll <= 0) {
+            scrollDirection = 1; // smoothly reverse when reaching the beginning
+            nextScroll = 0;
           }
+
           scrollRef.current.scrollLeft = nextScroll;
           setScrollProgress((nextScroll / maxScroll) * 100);
         }
@@ -58,7 +66,7 @@ const FeaturedProductsCarousel = ({ products }) => {
     return () => cancelAnimationFrame(animationId);
   }, []);
 
-  // Mouse Drag Events for 1:1 Smooth Hand/Mouse Glide
+  // Mouse & Touch Drag Events for 1:1 Smooth Hand/Mouse Glide
   const onMouseDown = (e) => {
     isDown.current = true;
     dragDistance.current = 0;
@@ -70,7 +78,7 @@ const FeaturedProductsCarousel = ({ products }) => {
     if (!isDown.current || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5; // smooth responsive drag multiplier
+    const walk = (x - startX.current) * 1.5;
     dragDistance.current = Math.abs(x - startX.current);
     scrollRef.current.scrollLeft = scrollLeft.current - walk;
     handleScroll();
@@ -87,6 +95,20 @@ const FeaturedProductsCarousel = ({ products }) => {
 
   const onMouseEnter = () => {
     isHovered.current = true;
+  };
+
+  // Touch handlers for mobile and tablet devices
+  const onTouchStart = () => {
+    isDown.current = true;
+    dragDistance.current = 0;
+  };
+
+  const onTouchMove = () => {
+    dragDistance.current = 10;
+  };
+
+  const onTouchEnd = () => {
+    isDown.current = false;
   };
 
   if (!products || products.length === 0) return null;
@@ -125,15 +147,18 @@ const FeaturedProductsCarousel = ({ products }) => {
         </div>
       </div>
 
-      {/* Smooth Mouse-Draggable Horizontal Track */}
+      {/* Smooth Mouse- & Touch-Draggable Horizontal Track */}
       <div
         ref={scrollRef}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseLeave}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
         onScroll={handleScroll}
-        className="flex gap-6 lg:gap-8 overflow-x-auto scrollbar-none py-2 px-1 -mx-1 cursor-grab active:cursor-grabbing scroll-smooth"
+        className="flex gap-6 lg:gap-8 overflow-x-auto scrollbar-none py-2 px-1 -mx-1 cursor-grab active:cursor-grabbing touch-pan-x"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {products.map((product) => (

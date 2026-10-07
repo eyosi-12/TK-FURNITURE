@@ -103,9 +103,11 @@ const Home = () => {
         {/* Full-Bleed Grand Furniture House Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2600&q=90"
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80"
             alt="TK Luxury Furniture House & Atelier Showroom"
             className="w-full h-full object-cover object-right lg:object-center"
+            decoding="async"
+            fetchPriority="high"
           />
           {/* Seamless feathered luxury studio vignette: gives crisp text readability on the left while showcasing the grand furniture house on the right */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/85 via-50% to-[#FAF8F5]/20 lg:to-transparent" />

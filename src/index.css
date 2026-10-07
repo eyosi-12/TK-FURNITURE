@@ -19,6 +19,7 @@
 
 html {
   scroll-behavior: auto;
+  overflow-x: hidden;
 }
 
 @keyframes pageFadeIn {
@@ -45,6 +46,7 @@ body {
   background-color: #FAF8F5;
   color: #292524;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Custom subtle scrollbar */

@@ -48,26 +48,20 @@ const Navbar = () => {
 
         {/* Desktop Nav Links with Smooth Flow Container */}
         <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 bg-[#F1ECE4]/70 p-1.5 rounded-full border border-[#E4DDD2]/80 backdrop-blur-xs shadow-2xs">
-          {navItems.map((item) => {
-            const isActive =
-              item.path === "/"
-                ? location.pathname === "/"
-                : location.pathname.startsWith(item.path);
-
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={`relative px-2.5 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-semibold tracking-wide transition-all duration-300 ease-out cursor-pointer select-none active:scale-95 ${
-                  isActive
-                    ? "bg-[#1C1917] text-[#FAF8F5] shadow-sm shadow-black/10 font-bold"
-                    : "text-[#57534E] hover:text-[#1C1917] hover:bg-white/80"
-                }`}
-              >
-                {item.label}
-              </NavLink>
-            );
-          })}
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              end={item.path === "/"}
+              className={({ isActive }) => `relative px-2.5 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-semibold tracking-wide transition-all duration-300 ease-out cursor-pointer select-none active:scale-95 ${
+                isActive
+                  ? "bg-[#1C1917] text-[#FAF8F5] shadow-sm shadow-black/10 font-bold"
+                  : "text-[#57534E] hover:text-[#1C1917] hover:bg-white/80"
+              }`}
+            >
+              {item.label}
+            </NavLink>
+          ))}
         </nav>
 
         {/* Right CTA & Language Toggle */}
@@ -105,27 +99,21 @@ const Navbar = () => {
           <LanguageToggle variant="mobile-drawer" />
 
           <div className="space-y-1">
-            {navItems.map((item) => {
-              const isActive =
-                item.path === "/"
-                  ? location.pathname === "/"
-                  : location.pathname.startsWith(item.path);
-
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={closeMenu}
-                  className={`block px-4 py-2.5 rounded-lg text-base font-medium transition-colors ${
-                    isActive
-                      ? "bg-[#1C1917] text-[#FAF8F5]"
-                      : "text-[#44403C] hover:bg-[#EFEAE2]"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            {navItems.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                end={item.path === "/"}
+                onClick={closeMenu}
+                className={({ isActive }) => `block px-4 py-2.5 rounded-lg text-base font-medium transition-colors ${
+                  isActive
+                    ? "bg-[#1C1917] text-[#FAF8F5]"
+                    : "text-[#44403C] hover:bg-[#EFEAE2]"
+                }`}
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </div>
 
           {!isContactPage && (

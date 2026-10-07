@@ -366,9 +366,12 @@ const Products = () => {
           {totalPages > 1 && (
             <div className="pt-6 border-t border-[#E7E2D9] flex items-center justify-center gap-2">
               <button
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                onClick={() => {
+                  setCurrentPage((p) => Math.max(1, p - 1));
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 disabled={currentPage === 1}
-                className="p-2 rounded-lg border border-[#D6D3D1] bg-white text-[#1C1917] hover:bg-[#F3EFEA] disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                className="p-2 rounded-lg border border-[#D6D3D1] bg-white text-[#1C1917] hover:bg-[#F3EFEA] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer"
                 aria-label={t("catalog.previous")}
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -377,8 +380,11 @@ const Products = () => {
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
                 <button
                   key={pageNumber}
-                  onClick={() => setCurrentPage(pageNumber)}
-                  className={`w-9 h-9 rounded-lg text-xs font-semibold transition-colors ${
+                  onClick={() => {
+                    setCurrentPage(pageNumber);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className={`w-9 h-9 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                     currentPage === pageNumber
                       ? "bg-[#1C1917] text-white"
                       : "bg-white border border-[#D6D3D1] text-[#44403C] hover:bg-[#F3EFEA]"
@@ -389,9 +395,12 @@ const Products = () => {
               ))}
 
               <button
-                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                onClick={() => {
+                  setCurrentPage((p) => Math.min(totalPages, p + 1));
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-lg border border-[#D6D3D1] bg-white text-[#1C1917] hover:bg-[#F3EFEA] disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                className="p-2 rounded-lg border border-[#D6D3D1] bg-white text-[#1C1917] hover:bg-[#F3EFEA] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer"
                 aria-label={t("catalog.next")}
               >
                 <ChevronRight className="w-4 h-4" />

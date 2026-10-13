@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { getOptimizedImageUrl } from "../utils/imageUtils";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -89,9 +90,11 @@ const Wishlist = () => {
               {/* Image */}
               <div className="w-full h-52 bg-gray-50 flex items-center justify-center overflow-hidden">
                 <img
-                  src={item.image}
+                  src={getOptimizedImageUrl(item.image, { width: 400, quality: 75 })}
                   alt={item.name}
                   className="object-cover w-full h-55"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 

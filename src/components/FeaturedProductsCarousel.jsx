@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router";
 import { ArrowUpRight, MoveHorizontal } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
@@ -9,21 +9,24 @@ const FeaturedProductsCarousel = ({ products }) => {
   const navigate = useNavigate();
 
   const scrollRef = useRef(null);
+  const progressBarRef = useRef(null);
   const isDown = useRef(false);
   const startX = useRef(0);
+  const startY = useRef(0);
   const scrollLeft = useRef(0);
   const dragDistance = useRef(0);
+  const isDraggingHorizontal = useRef(false);
   const isHovered = useRef(false);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
 
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Update progress bar
+  // Update progress bar via direct DOM ref to avoid 60fps React re-renders
   const handleScroll = () => {
-    if (!scrollRef.current) return;
+    if (!scrollRef.current || !progressBarRef.current) return;
     const { scrollLeft: sLeft, scrollWidth, clientWidth } = scrollRef.current;
     const maxScroll = scrollWidth - clientWidth;
     if (maxScroll > 0) {
-      setScrollProgress((sLeft / maxScroll) * 100);
+      progressBarRef.current.style.width = `${Math.max(15, Math.min(100, (sLeft / maxScroll) * 100))}%`;
     }
   };
 
@@ -55,7 +58,9 @@ const FeaturedProductsCarousel = ({ products }) => {
           }
 
           scrollRef.current.scrollLeft = nextScroll;
-          setScrollProgress((nextScroll / maxScroll) * 100);
+          if (progressBarRef.current) {
+            progressBarRef.current.style.width = `${Math.max(15, Math.min(100, (nextScroll / maxScroll) * 100))}%`;
+          }
         }
       }
 
@@ -66,30 +71,51 @@ const FeaturedProductsCarousel = ({ products }) => {
     return () => cancelAnimationFrame(animationId);
   }, []);
 
-  // Mouse & Touch Drag Events for 1:1 Smooth Hand/Mouse Glide
+  // Mouse drag events supporting both horizontal glide & vertical page glide
   const onMouseDown = (e) => {
     isDown.current = true;
     dragDistance.current = 0;
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeft.current = scrollRef.current.scrollLeft;
+    isDraggingHorizontal.current = false;
+    startX.current = e.pageX;
+    startY.current = e.pageY;
+    if (scrollRef.current) {
+      scrollLeft.current = scrollRef.current.scrollLeft;
+    }
   };
 
   const onMouseMove = (e) => {
     if (!isDown.current || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5;
-    dragDistance.current = Math.abs(x - startX.current);
-    scrollRef.current.scrollLeft = scrollLeft.current - walk;
-    handleScroll();
+
+    const deltaX = e.pageX - startX.current;
+    const deltaY = e.pageY - startY.current;
+    dragDistance.current = Math.max(Math.abs(deltaX), Math.abs(deltaY));
+
+    // If movement is predominantly vertical and horizontal drag hasn't locked in,
+    // allow gliding up or down the page freely
+    if (!isDraggingHorizontal.current && Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 6) {
+      window.scrollBy({ top: -deltaY, behavior: "auto" });
+      startY.current = e.pageY;
+      return;
+    }
+
+    // Horizontal glide
+    if (Math.abs(deltaX) > 6 || isDraggingHorizontal.current) {
+      isDraggingHorizontal.current = true;
+      e.preventDefault();
+      const walk = deltaX * 1.5;
+      scrollRef.current.scrollLeft = scrollLeft.current - walk;
+      handleScroll();
+    }
   };
 
   const onMouseUp = () => {
     isDown.current = false;
+    isDraggingHorizontal.current = false;
   };
 
   const onMouseLeave = () => {
     isDown.current = false;
+    isDraggingHorizontal.current = false;
     isHovered.current = false;
   };
 
@@ -97,14 +123,24 @@ const FeaturedProductsCarousel = ({ products }) => {
     isHovered.current = true;
   };
 
-  // Touch handlers for mobile and tablet devices
-  const onTouchStart = () => {
+  // Touch handlers allowing full natural vertical scrolling and horizontal swiping
+  const onTouchStart = (e) => {
     isDown.current = true;
     dragDistance.current = 0;
+    if (e.touches && e.touches[0]) {
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+    }
   };
 
-  const onTouchMove = () => {
-    dragDistance.current = 10;
+  const onTouchMove = (e) => {
+    if (e.touches && e.touches[0]) {
+      const diffX = Math.abs(e.touches[0].clientX - touchStartX.current);
+      const diffY = Math.abs(e.touches[0].clientY - touchStartY.current);
+      dragDistance.current = Math.max(diffX, diffY);
+    } else {
+      dragDistance.current = 10;
+    }
   };
 
   const onTouchEnd = () => {
@@ -119,7 +155,7 @@ const FeaturedProductsCarousel = ({ products }) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {/* Header with Title and "View Full Catalog" link (NO arrow buttons) */}
+      {/* Header with Title and "View Full Catalog" link */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-widest text-[#8A5333] block">
@@ -158,16 +194,16 @@ const FeaturedProductsCarousel = ({ products }) => {
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
         onScroll={handleScroll}
-        className="flex gap-6 lg:gap-8 overflow-x-auto scrollbar-none py-2 px-1 -mx-1 cursor-grab active:cursor-grabbing touch-pan-x"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex gap-6 lg:gap-8 overflow-x-auto scrollbar-none py-2 px-1 -mx-1 cursor-grab active:cursor-grabbing touch-auto"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none", touchAction: "auto" }}
       >
         {products.map((product) => (
           <div
             key={product.id}
             className="w-[280px] sm:w-[320px] lg:w-[360px] shrink-0"
             onClickCapture={(e) => {
-              // If user dragged more than 6px, prevent triggering link
-              if (dragDistance.current > 6) {
+              // If user dragged more than 8px, prevent triggering link
+              if (dragDistance.current > 8) {
                 e.preventDefault();
                 e.stopPropagation();
               }
@@ -181,8 +217,9 @@ const FeaturedProductsCarousel = ({ products }) => {
       {/* Sleek Modern Scroll Progress Bar */}
       <div className="w-full max-w-xs mx-auto h-1.5 bg-[#EAE5DC] rounded-full overflow-hidden">
         <div
+          ref={progressBarRef}
           className="h-full bg-[#8A5333] rounded-full transition-all duration-150"
-          style={{ width: `${Math.max(15, scrollProgress)}%` }}
+          style={{ width: "15%" }}
         />
       </div>
     </div>

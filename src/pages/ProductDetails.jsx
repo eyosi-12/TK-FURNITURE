@@ -15,6 +15,8 @@ import {
   Clock 
 } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "../components/SocialIcons";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -94,9 +96,13 @@ const ProductDetails = () => {
           {/* Main Large Product Image */}
           <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-[#F3EFEA] border border-[#E7E2D9] shadow-sm">
             <img
-              src={activeImage || product.image}
+              src={getOptimizedImageUrl(activeImage || product.image, { width: 900, quality: 80 })}
+              srcSet={getResponsiveSrcSet(activeImage || product.image, [400, 600, 900, 1200])}
+              sizes="(max-width: 1024px) 100vw, 60vw"
               alt={product.name}
               className="w-full h-full object-cover object-center transition-all duration-300"
+              decoding="async"
+              fetchPriority="high"
             />
             <div className="absolute top-4 left-4">
               <span className="bg-[#FAF8F5]/90 backdrop-blur-xs text-xs font-semibold text-[#1C1917] px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
@@ -112,16 +118,18 @@ const ProductDetails = () => {
                 <button
                   key={index}
                   onClick={() => setActiveImage(imgUrl)}
-                  className={`relative aspect-[4/3] rounded-xl overflow-hidden border-2 transition-all duration-200 focus:outline-none ${
+                  className={`relative aspect-[4/3] rounded-xl overflow-hidden border-2 transition-all duration-200 focus:outline-none cursor-pointer ${
                     activeImage === imgUrl
                       ? "border-[#8A5333] shadow-md scale-[1.02]"
                       : "border-[#E7E2D9] opacity-70 hover:opacity-100"
                   }`}
                 >
                   <img
-                    src={imgUrl}
+                    src={getOptimizedImageUrl(imgUrl, { width: 220, quality: 70 })}
                     alt={`${product.name} view ${index + 1}`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </button>
               ))}
@@ -244,22 +252,28 @@ const ProductDetails = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleShare("facebook")}
-                className="px-2.5 py-1.5 rounded-lg bg-white border border-[#D6D3D1] text-[#1C1917] hover:border-[#8A5333] hover:text-[#8A5333] font-semibold transition-colors"
+                className="w-9 h-9 rounded-xl bg-white border border-[#D6D3D1] text-[#1C1917] hover:border-[#8A5333] hover:text-[#8A5333] flex items-center justify-center transition-all shadow-2xs hover:scale-105 cursor-pointer"
+                aria-label="Share on Facebook"
+                title="Share on Facebook"
               >
-                FB
+                <FacebookIcon className="w-4 h-4" />
               </button>
               <button
                 onClick={() => handleShare("copy")}
-                className="px-2.5 py-1.5 rounded-lg bg-white border border-[#D6D3D1] text-[#1C1917] hover:border-[#8A5333] hover:text-[#8A5333] font-semibold transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-[#D6D3D1] text-[#1C1917] hover:border-[#8A5333] hover:text-[#8A5333] font-semibold text-xs transition-all shadow-2xs hover:scale-105 cursor-pointer"
                 title="Copy Link for Instagram / Direct share"
+                aria-label="Share on Instagram / Copy link"
               >
-                {shareCopied ? t("productDetails.linkCopied") : "IG / Link"}
+                <InstagramIcon className="w-4 h-4" />
+                <span>{shareCopied ? t("productDetails.linkCopied") : "Share"}</span>
               </button>
               <button
                 onClick={() => handleShare("whatsapp")}
-                className="px-2.5 py-1.5 rounded-lg bg-white border border-[#D6D3D1] text-[#1C1917] hover:border-[#8A5333] hover:text-[#8A5333] font-semibold transition-colors"
+                className="w-9 h-9 rounded-xl bg-white border border-[#D6D3D1] text-[#1C1917] hover:border-[#8A5333] hover:text-[#8A5333] flex items-center justify-center transition-all shadow-2xs hover:scale-105 cursor-pointer"
+                aria-label="Share on WhatsApp"
+                title="Share on WhatsApp"
               >
-                WhatsApp
+                <WhatsAppIcon className="w-4 h-4" />
               </button>
             </div>
           </div>

@@ -9,6 +9,7 @@ import {
   Compass,
 } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const About = () => {
   const { t } = useLanguage();
@@ -61,9 +62,13 @@ const About = () => {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] max-w-md mx-auto">
               <img
-                src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1000&q=80"
+                src={getOptimizedImageUrl("https://images.unsplash.com/photo-1538688525198-9b88f6f53126", { width: 640, quality: 75 })}
+                srcSet={getResponsiveSrcSet("https://images.unsplash.com/photo-1538688525198-9b88f6f53126", [360, 540, 720])}
+                sizes="(max-width: 768px) 100vw, 450px"
                 alt="Workshop artisan craftsmanship in Addis Ababa"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white">
@@ -123,16 +128,24 @@ const About = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-md">
                 <img
-                  src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=600&q=80"
+                  src={getOptimizedImageUrl("https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e", { width: 400, quality: 75 })}
+                  srcSet={getResponsiveSrcSet("https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e", [240, 360, 480])}
+                  sizes="(max-width: 768px) 50vw, 250px"
                   alt="TK Furniture Atelier Showroom"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="aspect-square rounded-2xl overflow-hidden shadow-md translate-y-6">
                 <img
-                  src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80"
+                  src={getOptimizedImageUrl("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6", { width: 400, quality: 75 })}
+                  srcSet={getResponsiveSrcSet("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6", [240, 360, 480])}
+                  sizes="(max-width: 768px) 50vw, 250px"
                   alt="Handcrafted Timber Living Design"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

@@ -46,6 +46,8 @@ const Testimonial = () => {
                   src={t.image}
                   alt={t.name}
                   className="w-14 h-14 rounded-full border-2 border-cyan-500"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">

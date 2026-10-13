@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../Context/CartContext";
 import { useNavigate } from "react-router";
+import { getOptimizedImageUrl } from "../utils/imageUtils";
 
 const Cart = () => {
   const { cart, removeFromCart, increaseQty, decreaseQty } = useCart();
@@ -30,9 +31,11 @@ const Cart = () => {
           >
             <div className="flex items-center gap-4 w-2/5"> 
               <img
-                src={item.image}
+                src={getOptimizedImageUrl(item.image, { width: 160, quality: 75 })}
                 alt={item.name}
                 className="w-20 h-20 object-cover rounded-lg"
+                loading="lazy"
+                decoding="async"
               />
               <div>
                 <h2 className="text-lg font-semibold">{item.name}</h2>

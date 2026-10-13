@@ -4,6 +4,7 @@ import useProjects from "../Hooks/useProjects";
 import Loader from "../components/Loader";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const Projects = () => {
   const { projects, loading, error } = useProjects();
@@ -76,10 +77,13 @@ const Projects = () => {
               {/* Project Photo */}
               <div className="relative aspect-[16/11] overflow-hidden bg-[#F3EFEA]">
                 <img
-                  src={localized.heroImage}
+                  src={getOptimizedImageUrl(localized.heroImage, { width: 640, quality: 75 })}
+                  srcSet={getResponsiveSrcSet(localized.heroImage, [340, 540, 720])}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt={localized.title}
                   className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500 ease-out"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute top-3 right-3">
                   <span className="bg-[#FAF8F5]/90 backdrop-blur-xs text-[11px] font-semibold text-[#1C1917] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-xs">

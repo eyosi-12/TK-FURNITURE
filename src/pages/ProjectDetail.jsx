@@ -7,6 +7,7 @@ import InquiryModal from "../components/InquiryModal";
 import Loader from "../components/Loader";
 import { ArrowLeft, MapPin, Send } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -85,9 +86,13 @@ const ProjectDetail = () => {
       <div className="space-y-4">
         <div className="relative aspect-[16/9] max-h-[600px] w-full rounded-3xl overflow-hidden bg-[#F3EFEA] shadow-md border border-[#E7E2D9]">
           <img
-            src={activePhoto || project.heroImage}
+            src={getOptimizedImageUrl(activePhoto || project.heroImage, { width: 1080, quality: 80 })}
+            srcSet={getResponsiveSrcSet(activePhoto || project.heroImage, [480, 720, 1080])}
+            sizes="100vw"
             alt={project.title}
             className="w-full h-full object-cover transition-all duration-300"
+            decoding="async"
+            fetchPriority="high"
           />
         </div>
 
@@ -98,16 +103,18 @@ const ProjectDetail = () => {
               <button
                 key={idx}
                 onClick={() => setActivePhoto(imgUrl)}
-                className={`relative aspect-[16/10] rounded-xl overflow-hidden border-2 transition-all duration-200 focus:outline-none ${
+                className={`relative aspect-[16/10] rounded-xl overflow-hidden border-2 transition-all duration-200 focus:outline-none cursor-pointer ${
                   activePhoto === imgUrl
                     ? "border-[#8A5333] shadow-md scale-[1.02]"
                     : "border-[#E7E2D9] opacity-75 hover:opacity-100"
                 }`}
               >
                 <img
-                  src={imgUrl}
+                  src={getOptimizedImageUrl(imgUrl, { width: 280, quality: 70 })}
                   alt={`${project.title} photo ${idx + 1}`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </button>
             ))}

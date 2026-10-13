@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import LocationMap from "../components/LocationMap";
 import { useLanguage } from "../Context/LanguageContext";
+import { FacebookIcon, InstagramIcon, TikTokIcon } from "../components/SocialIcons";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
@@ -261,9 +263,13 @@ const Contact = () => {
             ) : (
               <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-md border border-[#E7E2D9] bg-[#EAE5DC]">
                 <img
-                  src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=800&q=80"
+                  src={getOptimizedImageUrl("https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e", { width: 640, quality: 75 })}
+                  srcSet={getResponsiveSrcSet("https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e", [360, 540, 720])}
+                  sizes="(max-width: 768px) 100vw, 500px"
                   alt="TK Furniture Showroom Addis Ababa"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -342,25 +348,28 @@ const Contact = () => {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#D6D3D1] hover:border-[#8A5333] text-xs font-bold text-[#1C1917]"
+                  className="w-9 h-9 rounded-xl bg-[#FAF8F5] border border-[#D6D3D1] hover:border-[#8A5333] hover:bg-[#8A5333] text-[#1C1917] hover:text-white flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+                  aria-label="Facebook"
                 >
-                  FB
+                  <FacebookIcon className="w-4 h-4" />
                 </a>
                 <a
                   href="https://instagram.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#D6D3D1] hover:border-[#8A5333] text-xs font-bold text-[#1C1917]"
+                  className="w-9 h-9 rounded-xl bg-[#FAF8F5] border border-[#D6D3D1] hover:border-[#8A5333] hover:bg-[#8A5333] text-[#1C1917] hover:text-white flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+                  aria-label="Instagram"
                 >
-                  IG
+                  <InstagramIcon className="w-4 h-4" />
                 </a>
                 <a
                   href="https://tiktok.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#D6D3D1] hover:border-[#8A5333] text-xs font-bold text-[#1C1917]"
+                  className="w-9 h-9 rounded-xl bg-[#FAF8F5] border border-[#D6D3D1] hover:border-[#8A5333] hover:bg-[#8A5333] text-[#1C1917] hover:text-white flex items-center justify-center transition-all shadow-2xs hover:scale-105"
+                  aria-label="TikTok"
                 >
-                  TikTok
+                  <TikTokIcon className="w-4 h-4" />
                 </a>
               </div>
             </div>

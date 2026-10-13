@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 import HeroCarousel from "../components/HeroCarousel";
 import { ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const Home = () => {
   const { products, loading: productsLoading } = useProducts();
@@ -103,7 +104,9 @@ const Home = () => {
         {/* Full-Bleed Grand Furniture House Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80"
+            src={getOptimizedImageUrl("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0", { width: 1280, quality: 75 })}
+            srcSet={getResponsiveSrcSet("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0", [640, 960, 1280, 1920])}
+            sizes="100vw"
             alt="TK Luxury Furniture House & Atelier Showroom"
             className="w-full h-full object-cover object-right lg:object-center"
             decoding="async"
@@ -200,9 +203,13 @@ const Home = () => {
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#F3EFEA]">
                   <img
-                    src={localizedProject.heroImage}
+                    src={getOptimizedImageUrl(localizedProject.heroImage, { width: 720, quality: 75 })}
+                    srcSet={getResponsiveSrcSet(localizedProject.heroImage, [380, 640, 800])}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     alt={localizedProject.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-[#FAF8F5]/95 backdrop-blur-xs text-xs font-semibold text-[#1C1917] px-3 py-1 rounded-full uppercase tracking-wider shadow-xs">
@@ -245,9 +252,13 @@ const Home = () => {
           <div className="md:col-span-5">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
               <img
-                src="https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=800&q=80"
+                src={getOptimizedImageUrl("https://images.unsplash.com/photo-1581783342308-f792dbdd27c5", { width: 640, quality: 75 })}
+                srcSet={getResponsiveSrcSet("https://images.unsplash.com/photo-1581783342308-f792dbdd27c5", [360, 540, 720])}
+                sizes="(max-width: 768px) 100vw, 40vw"
                 alt="Woodcrafting in our Addis Ababa workshop"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-black/10" />
             </div>

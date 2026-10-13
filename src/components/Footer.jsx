@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { FacebookIcon, InstagramIcon, TikTokIcon } from "./SocialIcons";
 
 const Footer = () => {
   const { t, isAmharic } = useLanguage();
@@ -94,28 +95,28 @@ const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-xs font-bold transition-all border border-[#3B3632]"
+                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-[#E7E2D9] hover:text-white transition-all border border-[#3B3632] hover:border-[#8A5333] hover:scale-105 shadow-xs"
                 aria-label="Facebook"
               >
-                FB
+                <FacebookIcon className="w-4 h-4" />
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-xs font-bold transition-all border border-[#3B3632]"
+                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-[#E7E2D9] hover:text-white transition-all border border-[#3B3632] hover:border-[#8A5333] hover:scale-105 shadow-xs"
                 aria-label="Instagram"
               >
-                IG
+                <InstagramIcon className="w-4 h-4" />
               </a>
               <a
                 href="https://tiktok.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-xs font-bold transition-all border border-[#3B3632]"
+                className="w-10 h-10 rounded-full bg-[#292524] hover:bg-[#8A5333] flex items-center justify-center text-[#E7E2D9] hover:text-white transition-all border border-[#3B3632] hover:border-[#8A5333] hover:scale-105 shadow-xs"
                 aria-label="TikTok"
               >
-                TikTok
+                <TikTokIcon className="w-4 h-4" />
               </a>
             </div>
             <div className="pt-2 text-xs text-[#A8A29E] space-y-1">

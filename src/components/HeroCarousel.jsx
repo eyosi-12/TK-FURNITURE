@@ -1,32 +1,33 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const HERO_SLIDES = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=960&q=80",
+    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6",
     badgeKey: "carousel.slide1.badge",
     titleKey: "carousel.slide1.title",
     subtitleKey: "carousel.slide1.subtitle",
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=960&q=80",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc",
     badgeKey: "carousel.slide2.badge",
     titleKey: "carousel.slide2.title",
     subtitleKey: "carousel.slide2.subtitle",
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=960&q=80",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace",
     badgeKey: "carousel.slide3.badge",
     titleKey: "carousel.slide3.title",
     subtitleKey: "carousel.slide3.subtitle",
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=960&q=80",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
     badgeKey: "carousel.slide4.badge",
     titleKey: "carousel.slide4.title",
     subtitleKey: "carousel.slide4.subtitle",
@@ -51,15 +52,15 @@ const HeroCarousel = () => {
   const touchEndX = useRef(0);
   const transitionTimeout = useRef(null);
 
-  // Preload and decode all images into GPU memory on mount
+  // Preload secondary slides in idle time without blocking initial page render
   useEffect(() => {
-    HERO_SLIDES.forEach((slide) => {
-      const img = new Image();
-      img.src = slide.image;
-      if (typeof img.decode === "function") {
-        img.decode().catch(() => {});
-      }
-    });
+    const timer = setTimeout(() => {
+      HERO_SLIDES.slice(1).forEach((slide) => {
+        const img = new Image();
+        img.src = getOptimizedImageUrl(slide.image, { width: 640, quality: 75 });
+      });
+    }, 1200);
+    return () => clearTimeout(timer);
   }, []);
 
   // Handle seamless loop teleportation when hitting clones
@@ -151,11 +152,12 @@ const HeroCarousel = () => {
 
   return (
     <div
-      className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] max-w-md mx-auto group select-none"
+      className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] max-w-md mx-auto group select-none touch-pan-y"
       style={{
         isolation: "isolate",
         WebkitMaskImage: "-webkit-radial-gradient(white, black)",
         transform: "translateZ(0)",
+        touchAction: "pan-y",
       }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -195,10 +197,12 @@ const HeroCarousel = () => {
               aria-hidden={index !== displayIndex}
             >
               <img
-                src={slide.image}
+                src={getOptimizedImageUrl(slide.image, { width: 640, quality: 75 })}
+                srcSet={getResponsiveSrcSet(slide.image, [360, 540, 720])}
+                sizes="(max-width: 640px) 90vw, 480px"
                 alt={title}
                 className="w-full h-full object-cover select-none pointer-events-none"
-                loading="eager"
+                loading={index === 1 ? "eager" : "lazy"}
                 decoding="async"
                 draggable={false}
               />

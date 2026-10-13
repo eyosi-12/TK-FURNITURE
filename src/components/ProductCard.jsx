@@ -1,23 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "../Context/LanguageContext";
+import { getOptimizedImageUrl, getResponsiveSrcSet } from "../utils/imageUtils";
 
 const ProductCard = ({ item, buttonText }) => {
   const { localizeProduct, formatPrice, t } = useLanguage();
   const localizedItem = localizeProduct(item) || item;
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const displayButtonText = buttonText || t("home.viewDetails");
 
   return (
     <div className="group bg-white rounded-2xl overflow-hidden border border-[#E7E2D9] hover:border-[#8A5333]/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-      {/* Image container */}
+      {/* Image container with skeleton pulse */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F3EFEA]">
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-[#ECE7DE] animate-pulse" />
+        )}
         <img
-          src={localizedItem.image}
+          src={getOptimizedImageUrl(localizedItem.image, { width: 480, quality: 75 })}
+          srcSet={getResponsiveSrcSet(localizedItem.image, [280, 420, 640])}
+          sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 380px"
           alt={localizedItem.name}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+          className={`w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-500 ease-out ${
+            imageLoaded ? "opacity-100" : "opacity-0"
+          }`}
           loading="lazy"
+          decoding="async"
+          onLoad={() => setImageLoaded(true)}
         />
         {/* Category tag */}
         <span className="absolute top-3 left-3 bg-[#FAF8F5]/90 backdrop-blur-xs text-[11px] font-semibold text-[#1C1917] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-xs">
